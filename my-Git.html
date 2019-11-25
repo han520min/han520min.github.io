@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>GIT</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="韩敏">
+
+    <!-- Le styles -->
+    <link rel="stylesheet" href="/theme/css/bootstrap.dark.css" type="text/css" />
+    <style type="text/css">
+      body {
+        padding-top: 60px;
+        padding-bottom: 40px;
+      }
+      .sidebar-nav {
+        padding: 9px 0;
+      }
+      .tag-1 {
+        font-size: 13pt;
+      }
+      .tag-2 {
+        font-size: 10pt;
+      }
+      .tag-2 {
+        font-size: 8pt;
+      }
+      .tag-4 {
+        font-size: 6pt;
+     }
+    </style>
+    <link href="/theme/css/bootstrap-responsive.dark.css" rel="stylesheet">
+        <link href="/theme/css/font-awesome.css" rel="stylesheet">
+
+    <link href="/theme/css/pygments.css" rel="stylesheet">
+
+    <!-- Le HTML5 shim, for IE6-8 support of HTML5 elements -->
+    <!--[if lt IE 9]>
+      <script src="//html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    <!-- Le fav and touch icons -->
+    <link rel="shortcut icon" href="/theme/images/favicon.ico">
+    <link rel="apple-touch-icon" href="/theme/images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="/theme/images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="/theme/images/apple-touch-icon-114x114.png">
+
+    <link href="/" type="application/atom+xml" rel="alternate" title="韩敏的技术博客 ATOM Feed" />
+
+  </head>
+
+  <body>
+
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container-fluid">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <a class="brand" href="/index.html">韩敏的技术博客 </a>
+          <div class="nav-collapse">
+            <ul class="nav">
+                          <li class="divider-vertical"></li>
+                  <li >
+                    <a href="/category/ji-zhu.html">
+						<i class="icon-folder-open icon-large"></i>技术
+					</a>
+                  </li>
+                  <li class="active">
+                    <a href="/category/my-shang.html">
+						<i class="icon-folder-open icon-large"></i>my-shang
+					</a>
+                  </li>
+
+                          <ul class="nav pull-right">
+                                <li><a href="/archives.html"><i class="icon-th-list"></i>Archives</a></li>
+                          </ul>
+
+            </ul>
+            <!--<p class="navbar-text pull-right">Logged in as <a href="#">username</a></p>-->
+          </div><!--/.nav-collapse -->
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="span9" id="content">
+<section id="content">
+        <article>
+                <header>
+                        <h1>
+                                <a href=""
+                                        rel="bookmark"
+                                        title="Permalink to GIT">
+                                        GIT
+                                </a>
+                        </h1>
+                </header>
+                <div class="entry-content">
+                <div class="well">
+<footer class="post-info">
+<span class="label">Date</span>
+<abbr class="published" title="2019-08-08T18:44:00+02:00">
+        <i class="icon-calendar"></i>周四 08 八月 2019
+</abbr>
+<span class="label">By</span>
+<a href="/author/han-min.html"><i class="icon-user"></i>韩敏</a>
+<span class="label">Category</span>
+<a href="/category/my-shang.html"><i class="icon-folder-open"></i>my-shang</a>.
+
+
+<span class="label">Tags</span>
+	<a href="/tag/shang.html"><i class="icon-tag"></i>shang</a>
+</footer><!-- /.post-info -->                </div>
+                <h1>Git</h1>
+<h2>创建账号</h2>
+<ul>
+<li>useradd  名字</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span> <span class="err">根目录</span>
+<span class="n">ls</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span>
+<span class="n">cat</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">config</span>   <span class="c1"># cat查看文件</span>
+<span class="n">ssh</span> <span class="err">名字</span><span class="nd">@主机</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
+<span class="c1"># 切换用户</span>
+<span class="n">su</span> <span class="o">-</span> <span class="err">名称</span>
+</pre></div>
+
+
+<ul>
+<li>passwd 密码</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span>
+<span class="c1"># 修改</span>
+<span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">sshd_config</span>
+<span class="n">RSAAuthentication</span>  <span class="n">yes</span>
+<span class="n">PubkeyAuthentication</span>  <span class="n">yes</span>
+<span class="n">PasswordAuthentication</span>  <span class="n">yes</span>
+<span class="c1"># 需要重启</span>
+<span class="n">systemctl</span> <span class="n">restart</span> <span class="n">sshd</span><span class="o">.</span><span class="n">service</span>
+</pre></div>
+
+
+<ul>
+<li>生成公钥私钥</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span>
+<span class="p">(</span><span class="err">默认是</span><span class="n">id_rsa</span><span class="p">)</span><span class="o">./</span><span class="err">密码名称</span> 
+<span class="n">mkdir</span> <span class="o">.</span><span class="n">ssh</span>   <span class="c1">#创建</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">a</span>  <span class="c1"># 打印隐藏文件</span>
+<span class="c1"># 创建管理公钥文件</span>
+<span class="n">touch</span> <span class="o">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>  
+<span class="c1"># 设置目录权限</span>
+<span class="n">chmod</span> <span class="mi">700</span> <span class="o">.</span><span class="n">ssh</span>
+<span class="c1"># 设置文件权限</span>
+<span class="n">chmod</span> <span class="mi">600</span> <span class="o">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+<span class="c1"># 打开</span>
+<span class="n">vi</span> <span class="o">.</span><span class="n">ssh</span><span class="o">/</span><span class="n">authorized_keys</span>
+<span class="c1"># 转到本地 </span>
+<span class="n">cat</span> <span class="err">名称</span><span class="o">.</span><span class="n">pub</span>  <span class="c1"># 查看公钥</span>
+</pre></div>
+
+
+<ul>
+<li>登录</li>
+</ul>
+<div class="highlight"><pre><span></span><span class="n">ssh</span> <span class="err">名字</span><span class="nd">@ip地址</span> <span class="o">-</span><span class="n">i</span> <span class="o">./</span><span class="err">密钥</span>
+<span class="c1"># 使用证书登录   </span>
+<span class="n">ssh</span> <span class="n">test_user</span><span class="nd">@62.234.92.111</span> <span class="o">-</span><span class="n">i</span> <span class="err">证书路径</span>
+</pre></div>
+
+
+<h2>搭建git服务</h2>
+<ol>
+<li>创建git用户    useradd git</li>
+<li>设置git用户ssh权限目录和文件</li>
+<li>创建一个裸版本库</li>
+</ol>
+<div class="highlight"><pre><span></span>su - git                            <span class="c1"># 登录git用户</span>
+git init --bare project.git         <span class="c1"># 创建一个裸仓库</span>
+</pre></div>
+
+
+<h2>创建一个文件并提交</h2>
+<div class="highlight"><pre><span></span>touch readme.txt                        <span class="c1"># 创建readme.txt 文件</span>
+git add readme.txt                         <span class="c1"># 添加到暂存区中 </span>
+git commit -m <span class="s2">&quot;添加readme文件&quot;</span>              <span class="c1"># 提交到本地版本库里</span>
+git push origin                            <span class="c1"># 推送到远程仓库</span>
+git pull origin                           <span class="c1"># 拉取文件</span>
+</pre></div>
+
+
+<h2>git 常用命令</h2>
+<div class="highlight"><pre><span></span>git status
+git 
+</pre></div>
+                </div><!-- /.entry-content -->
+        </article>
+</section>
+        </div><!--/span-->
+
+                <div class="span3 well sidebar-nav" id="sidebar">
+<ul class="nav nav-list">
+<li class="nav-header"><h4><i class="icon-external-link"></i>blogroll</h4></li>
+    <li><a href="http://getpelican.com/"><i class="icon-external-link"></i>Pelican</a></li>
+    <li><a href="http://python.org/"><i class="icon-external-link"></i>Python.org</a></li>
+    <li><a href="http://jinja.pocoo.org/"><i class="icon-external-link"></i>Jinja2</a></li>
+    <li><a href="#"><i class="icon-external-link"></i>You can modify those links in your config file</a></li>
+<li class="nav-header"><h4><i class="icon-home icon-large"></i> social</h4></li>
+<li><a href="/" rel="alternate"><i class="icon-bookmark icon-large"></i>atom feed</a></li>
+    <li><a href="#"><i class="icon-You can add links in your config file-sign icon-large"></i>You can add links in your config file</a></li>
+    <li><a href="#"><i class="icon-Another social link-sign icon-large"></i>Another social link</a></li>
+
+<li class="nav-header"><h4><i class="icon-folder-close icon-large"></i>Categories</h4></li>
+<li>
+<a href="/category/ji-zhu.html">
+    <i class="icon-folder-open icon-large"></i>技术
+</a>
+</li>
+<li>
+<a href="/category/my-shang.html">
+    <i class="icon-folder-open icon-large"></i>my-shang
+</a>
+</li>
+
+<li class="nav-header"><h4><i class="icon-tags icon-large"></i>Tags</h4></li>
+
+
+</ul>        </div><!--/.well -->
+
+      </div><!--/row-->
+
+      <hr>
+
+      <footer>
+        <address id="about">
+                Proudly powered by <a href="http://pelican.notmyidea.org/">Pelican <i class="icon-external-link"></i></a>,
+                                which takes great advantage of <a href="http://python.org">Python <i class="icon-external-link"></i></a>.
+        </address><!-- /#about -->
+
+        <p>The theme is based on <a href="http://twitter.github.com/bootstrap/">Bootstrap from Twitter <i class="icon-external-link"></i></a>,
+                   and <a href="http://fortawesome.github.com/Font-Awesome/">Font-Awesome <i class="icon-external-link"></i></a>, thanks!</p>
+      </footer>
+
+    </div><!--/.fluid-container-->
+
+
+
+    <!-- Le javascript -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="/theme/js/jquery-1.7.2.min.js"></script>
+    <script src="/theme/js/bootstrap.min.js"></script>
+  </body>
+</html>
