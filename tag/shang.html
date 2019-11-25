@@ -99,164 +99,6 @@ echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf
 	</div>
 </div>	
 <div class='article'>
-	<h2>rabbitmq</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-rabbitmq.html">2019-08-09 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><p>1.下载relang</p>
-<div class="highlight"><pre><span></span>yum install erlang
-</pre></div>
-
-
-<p>2.下载rpm包</p>
-<div class="highlight"><pre><span></span> wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
-</pre></div>
-
-
-<p>3.下载完成后安装</p>
-<div class="highlight"><pre><span></span>yum install rabbitmq-server-3.6.15-1.el7.noarch.rpm
-</pre></div>
-
-
-<p>4.安装完后重启服务</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server start
-</pre></div>
-
-
-<p>5.查看服务状态</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server status
-</pre></div>
-
-
-<ol>
-<li>安装插件</li>
-</ol>
-<div class="highlight"><pre><span></span>/sbin/rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management 
-</pre></div>
-
-
-<p>7.重启服务 …</p> <a class="btn primary xsmall" href="/my-rabbitmq.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>Django126发送邮件</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-126.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><ul>
-<li>首先取得网易授权</li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="m">1</span>. 设置
-  <span class="m">2</span>.左侧客户端授权码
-  <span class="m">3</span>.自定义授权码 也就是你配置文件中的密码
-</pre></div>
-
-
-<ul>
-<li>配置文件</li>
-</ul>
-<div class="highlight"><pre><span></span>  邮件
-  <span class="nv">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.126.com&#39;</span>
-  设置端口号，为数字
-  <span class="nv">EMAIL_PORT</span> <span class="o">=</span> <span class="m">25</span>
-  设置发件人邮箱
-  <span class="nv">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;fuchongjun@126.com&#39;</span>
-  设置发件人 授权码
-  <span class="nv">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;ice115816&#39;</span>
-  设置是否启用安全链接
-  <span class="nv">EMAIL_USER_TLS</span> <span class="o">=</span> True
-  <span class="nv">EMAIL_USER_TLS</span> <span class="o">=</span> False
-  <span class="nv">DEFAULT_FROM_EMAIL</span> <span class="o">=</span> EMAIL_HOST_USER
-</pre></div>
-
-
-<ul>
-<li>views.py</li>
-</ul>
-<p><code>`shell
-  from django.core.mail import send_email
-  from django.conf import settings
-  def sendMsg …</code></p> <a class="btn primary xsmall" href="/my-126.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>GIT</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-Git.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h1>Git</h1>
-<h2>创建账号</h2>
-<ul>
-<li>useradd  名字</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="n">ls</span> <span class="o">/</span> <span class="err">根目录</span>
-<span class="n">ls</span> <span class="o">/</span><span class="n">home</span><span class="o">/</span>
-<span class="n">cat</span> <span class="o">~/.</span><span class="n">ssh</span><span class="o">/</span><span class="n">config</span>   <span class="c1"># cat查看文件</span>
-<span class="n">ssh</span> <span class="err">名字</span><span class="nd">@主机</span><span class="p">(</span><span class="n">ip</span><span class="p">)</span>
-<span class="c1"># 切换用户</span>
-<span class="n">su</span> <span class="o">-</span> <span class="err">名称</span>
-</pre></div>
-
-
-<ul>
-<li>passwd 密码</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span>
-<span class="c1"># 修改</span>
-<span class="n">vi</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssh</span><span class="o">/</span><span class="n">sshd_config</span>
-<span class="n">RSAAuthentication</span>  <span class="n">yes</span>
-<span class="n">PubkeyAuthentication</span>  <span class="n">yes</span>
-<span class="n">PasswordAuthentication</span>  <span class="n">yes</span>
-<span class="c1"># 需要重启</span>
-<span class="n">systemctl</span> <span class="n">restart</span> <span class="n">sshd</span><span class="o">.</span><span class="n">service</span>
-</pre></div>
-
-
-<ul>
-<li>生成公钥私钥</li>
-</ul>
-<div class="highlight"><pre><span></span><span class="n">ssh</span><span class="o">-</span><span class="n">keygen</span>
-<span class="p">(</span><span class="err">默认是</span><span class="n">id_rsa</span><span class="p">)</span><span class="o">./</span><span class="err">密码名称</span> 
-<span class="n">mkdir</span> <span class="o">.</span><span class="n">ssh</span>   <span class="c1">#创建</span>
-<span class="n">ls …</span></pre></div> <a class="btn primary xsmall" href="/my-Git.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>django跨域与VUE跨域</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-一对多.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>Django一对多查询</h2>
-<ul>
-<li><code>models.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
-
-  <span class="c1"># 创建用户</span>
-  <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-      <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-  <span class="c1"># 创建书籍  </span>
-  <span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-      <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
-      <span class="n">us</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Foreign</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span><span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
-</pre></div>
-
-
-<ul>
-<li><code>views.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="kn">from</span> <span class="nn">django.shortcus</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span><span class="n">HttpResponse</span>
-  <span class="kn">import</span> <span class="nn">models</span>
-  <span class="c1"># 通过人查询书</span>
-  <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
-      <span class="n">user …</span></pre></div> <a class="btn primary xsmall" href="/my-一对多.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
 	<h2>django分页组件（paginator）</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-分页.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
@@ -287,71 +129,6 @@ p.page_range<span class="o">()</span> <span class="c1"># 列表形式返回当�
 <div class="highlight"><pre><span></span>page_1.number <span class="c1"># 当前页的页码</span>
 page_1.has_next<span class="o">()</span> <span class="c1"># 是否有下一页</span>
 page_1 …</pre></div> <a class="btn primary xsmall" href="/my-分页.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>redis哨兵模式</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-哨兵.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h1>Redis哨兵(Sentinel)模式</h1>
-<h2>一、概述</h2>
-<p>哨兵通过发送命令。等待Redis服务器响应，从而监控运行的多个Redis实例</p>
-<p><img alt="1574609729003" src="http://c.biancheng.net/uploads/allimg/190725/5-1ZH51400314I.png"></p>
-<h3>哨兵作用</h3>
-<ul>
-<li>通过发送命令，让Redis服务器返回 监控其运行状态，包括主服务器和从服务器</li>
-<li>当哨兵监测到master宕机，会自动将slave(从)切换成master(主)，然后通过‘发布订阅模式’ 通知其他从服务器，修改配置文件，让他们切换主机</li>
-</ul>
-<h2>二、配置redis主从服务器</h2>
-<ol>
-<li>修改redis.conf</li>
-</ol>
-<div class="highlight"><pre><span></span>   <span class="c1"># redis服务器可以跨网络访问</span>
-   <span class="n">bind</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
-   <span class="c1"># 设置密码</span>
-   <span class="n">requirepass</span> <span class="s1">&#39;123&#39;</span>
-   <span class="c1"># 指定主服务器(只配置从服务器，主服务器不需要配置)</span>
-   <span class="n">slaveof</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.128</span> <span class="mi">6379</span>
-   <span class="c1"># 主服务器密码</span>
-   <span class="n">masterauth</span> <span class="mi">123</span>
-</pre></div>
-
-
-<ol>
-<li>配置3个哨兵，每个哨兵的配置都是一样的 …</li></ol> <a class="btn primary xsmall" href="/my-哨兵.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>django多对多操作</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>django 多对多操作</h2>
-<ul>
-<li>模型</li>
-</ul>
-<div class="highlight"><pre><span></span>  from django.db import models
-
-  <span class="c1"># 老师</span>
-  class Teacher<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-
-  <span class="c1"># 学生</span>
-  class Student<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-      <span class="nv">teachers</span> <span class="o">=</span> models.ManyToManyField<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Teacher&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
-</pre></div>
-
-
-<ul>
-<li>查询</li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="c1"># 通过老师查学生</span>
-  <span class="nv">teacher</span> <span class="o">=</span> Teacher.objects.filter<span class="o">(</span><span class="nv">id</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>.first<span class="o">()</span>
-  <span class="nv">students</span> <span class="o">=</span> teacher.student_set.all<span class="o">()</span> <span class="c1"># 获取所有学生信息 …</span></pre></div> <a class="btn primary xsmall" href="/my-多对多.html">more…</a>
 	</div>
 </div>	
 <div class='article'>
@@ -427,15 +204,53 @@ tags: <a href="/tag/shang.html">shang</a> </div>
       <span class="o">}</span>, <span class="k">function …</span></pre></div> <a class="btn primary xsmall" href="/my-拦截器.html">more…</a>
 	</div>
 </div>	
-
-<div class="pagination">
+<div class='article'>
+	<h2>支付宝沙箱模式</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-支付宝沙箱.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h3>支付宝支付</h3>
 <ul>
-		<li class="prev disabled"><a href="#">&larr; Previous</a></li>
-		<li class="active"><a href="/tag/shang.html">1</a></li>
-		<li class=""><a href="/tag/shang2.html">2</a></li>
-		<li class="next"><a href="/tag/shang2.html">Next &rarr;</a></li>
+<li>安装模块</li>
 </ul>
-</div>
+<div class="highlight"><pre><span></span>  pip install Crypto 
+  pip install pycryptodome
+  pip install python-alipay-sdk
+</pre></div>
+
+
+<ul>
+<li>
+<p>下载RSA工具
+  <img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134351045-2102495901.png"></p>
+</li>
+<li>
+<p>将生成的公钥上传到支付宝沙箱的RSA2(SHA256)密钥(推荐）处</p>
+</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134403625-1800493074.jpg"></p>
+<ul>
+<li>设置公钥后会生成一个支付宝公钥，将其复制</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134416436-1047655704.png"></p>
+<ul>
+<li>然后将其写入一个文件 <code>alipay_pulic_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN PUBLIC KEY-----
+  MIGfMA0GCSqGSIb3DQEBAQUAA4GNIgHnOn7LLILlKETd6BFRJ0GqgS2Y3mn1wMQmyh9zEyWlz5p1zrahRahbXAfCfSqshSNfqOmAQzSHRVjCqjsAw1jyqrXaPdKBmr90DIpIxmIyKXv4GGAkPyJ/6FTFY99uhpiq0qadD/uSzQsefWo0aTvP/65zi3eof7TcZ32oWpwIDAQAB
+  -----END PUBLIC KEY-----
+</pre></div>
+
+
+<ul>
+<li>把之前生成的私钥也写入另外一个文件 <code>app_private_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN RSA PRIVATE KEY-----
+  MIIEowIBAAKCAQEAgxk5N/XQkRatTn56TxGo8nVGk4YKb7VheSDtcLezj7sDdibVamrWz/77VG1GY17Q2jOnCoHpngWDsJybZ/5icblvk3I76H5GT+zjYMBbHXfAlnRB7BG6+Vo7YWe442S0E+A8z8N+R3MArSb3+Coht+8JgvGNdsVE9u2upmxq4GHMKDu/TY3Q7lPIXW3iL6Kxn …</pre></div> <a class="btn primary xsmall" href="/my-支付宝沙箱.html">more…</a>
+	</div>
+</div>	
+
 
 		<footer>
 		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>

@@ -29,7 +29,7 @@
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
-					<li class="active"><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/my-shang.html">my-shang</a></li>
 			</ul>
 			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
 		</div>
@@ -56,112 +56,7 @@
 		</div>
 	  </div>
 	  <div class="content">
-<div class="page-header"><h1>韩敏的技术博客 <small>my-shang</small></h1></div>
-<div class='article'>
-	<h2>Supervisor</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-Supervisor.html">2019-08-09 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>介绍</h2>
-<p>Supervisor就是一个超级管理员，监管员。Supervisor是一个进程管理工具，当进程中断的时候Supervisor能自动重新启动它。</p>
-<h2>Supervisor安装与配置</h2>
-<h3>1、安装Python包管理工具(<a href="https://pypi.org/project/setuptools/">easy_install</a>)</h3>
-<div class="highlight"><pre><span></span>yum install python-setuptools
-</pre></div>
-
-
-<h3>2、安装Supervisor</h3>
-<div class="highlight"><pre><span></span>easy_install supervisor
-</pre></div>
-
-
-<h3>3、配置Supervisor应用守护</h3>
-<p>a) 通过运行echo_supervisord_conf程序生成supervisor的初始化配置文件，如下所示：</p>
-<div class="highlight"><pre><span></span>mkdir /etc/supervisor
-echo_supervisord_conf &gt; /etc/supervisor/supervisord.conf
-</pre></div>
-
-
-<p>然后查看路径下的supervisord.conf。在文件尾部添加如下配置。</p>
-<div class="highlight"><pre><span></span>...
-
-<span class="p">;</span><span class="o">[</span>include<span class="o">]</span>
-<span class="p">;</span><span class="nv">files</span> <span class="o">=</span> relative/directory/*.ini
-
-<span class="p">;</span>conf.d 为配置表目录的文件夹，需要手动创建
-<span class="o">[</span>include<span class="o">]</span>
-<span class="nv">files</span> <span class="o">=</span> conf.d/*.conf
-</pre></div>
-
-
-<p>b) 为你的程序创建一个.conf文件，放在目录 …</p> <a class="btn primary xsmall" href="/my-Supervisor.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>rabbitmq</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-rabbitmq.html">2019-08-09 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/rabbitmq.html">rabbitmq</a> </div>
-	<div class="summary"><p>1.下载relang</p>
-<div class="highlight"><pre><span></span>yum install erlang
-</pre></div>
-
-
-<p>2.下载rpm包</p>
-<div class="highlight"><pre><span></span> wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
-</pre></div>
-
-
-<p>3.下载完成后安装</p>
-<div class="highlight"><pre><span></span>yum install rabbitmq-server-3.6.15-1.el7.noarch.rpm
-</pre></div>
-
-
-<p>4.安装完后重启服务</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server start
-</pre></div>
-
-
-<p>5.查看服务状态</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server status
-</pre></div>
-
-
-<ol>
-<li>安装插件</li>
-</ol>
-<div class="highlight"><pre><span></span>/sbin/rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management 
-</pre></div>
-
-
-<p>7.重启服务 …</p> <a class="btn primary xsmall" href="/my-rabbitmq.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>个人简历</h2>
-	<div class="well small">Permalink: <a class="more" href="/myself.html">2019-08-09 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/myself.html">myself</a> </div>
-	<div class="summary"><h2>基本信息</h2>
-<h5>韩敏  1996年12月</h5>
-<h5>三年工作经验</h5>
-<h5>手机：15909542938</h5>
-<h5>邮箱：2036156267@qq.com</h5>
-<h5>个人网站：https://gitee.com/han520min</h5>
-<p>​                   <a href="https://han520min.github.io/"><strong>https://han520min.github.io</strong></a></p>
-<h2>个人简历</h2>
-<p>​           从事互联网事业已有三年，在这期间，有对<strong>django</strong>，<strong>flask</strong>等框架，对<strong>异步非阻塞</strong></p>
-<p>都有较深刻的认识，开发过多个项目，掌握<strong>vue.js</strong>开发，了解<strong>HTTP协议</strong>，掌握<strong>MySQL数据</strong></p>
-<p><strong>库</strong>，有优秀的学习能力和团队沟通能力，能与团队共同学习</p>
-<h2>教育背景</h2>
-<h4>2012 - 2015  /   南开大学   本科（统招一本）</h4>
-<h2>技术点</h2>
-<p>一、精通 …</p> <a class="btn primary xsmall" href="/myself.html">more…</a>
-	</div>
-</div>	
+<div class="page-header"><h1>韩敏的技术博客 <small>django</small></h1></div>
 <div class='article'>
 	<h2>Django126发送邮件</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-126.html">2019-08-08 18:44:00+02:00</a>
@@ -280,73 +175,6 @@ tags: <a href="/tag/django.html">django</a> </div>
 	</div>
 </div>	
 <div class='article'>
-	<h2>django分页组件（paginator）</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-分页.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h1>Django分页组件(paginator)</h1>
-<blockquote>
-<p><code>shell
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger</code></p>
-</blockquote>
-<div class="highlight"><pre><span></span>  Paginator
-</pre></div>
-
-
-<p>：创建分页对象</p>
-<p>### 分页对象内置属性</p>
-<div class="highlight"><pre><span></span><span class="nv">all_</span> <span class="o">=</span> models.objects.all<span class="o">()</span>
-<span class="nv">p</span> <span class="o">=</span> Paginator<span class="o">(</span>all_, <span class="m">10</span><span class="o">)</span>
-<span class="c1"># 分页all_数据，每页显示10条数据</span>
-p.count <span class="c1"># 总数据量</span>
-p.num_pages<span class="o">()</span> <span class="c1"># 分页数</span>
-p.page_range<span class="o">()</span> <span class="c1"># 列表形式返回当前可有的页数 [1,2,3]</span>
-<span class="nv">page_1</span> <span class="o">=</span> p.page<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="c1"># 选择第一页，返回第一页数据对象</span>
-</pre></div>
-
-
-<h3>某一页内置属性</h3>
-<div class="highlight"><pre><span></span>page_1.number <span class="c1"># 当前页的页码</span>
-page_1.has_next<span class="o">()</span> <span class="c1"># 是否有下一页</span>
-page_1 …</pre></div> <a class="btn primary xsmall" href="/my-分页.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>redis哨兵模式</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-哨兵.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/redis.html">redis</a> </div>
-	<div class="summary"><h1>Redis哨兵(Sentinel)模式</h1>
-<h2>一、概述</h2>
-<p>哨兵通过发送命令。等待Redis服务器响应，从而监控运行的多个Redis实例</p>
-<p><img alt="1574609729003" src="http://c.biancheng.net/uploads/allimg/190725/5-1ZH51400314I.png"></p>
-<h3>哨兵作用</h3>
-<ul>
-<li>通过发送命令，让Redis服务器返回 监控其运行状态，包括主服务器和从服务器</li>
-<li>当哨兵监测到master宕机，会自动将slave(从)切换成master(主)，然后通过‘发布订阅模式’ 通知其他从服务器，修改配置文件，让他们切换主机</li>
-</ul>
-<h2>二、配置redis主从服务器</h2>
-<ol>
-<li>修改redis.conf</li>
-</ol>
-<div class="highlight"><pre><span></span>   <span class="c1"># redis服务器可以跨网络访问</span>
-   <span class="n">bind</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
-   <span class="c1"># 设置密码</span>
-   <span class="n">requirepass</span> <span class="s1">&#39;123&#39;</span>
-   <span class="c1"># 指定主服务器(只配置从服务器，主服务器不需要配置)</span>
-   <span class="n">slaveof</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.128</span> <span class="mi">6379</span>
-   <span class="c1"># 主服务器密码</span>
-   <span class="n">masterauth</span> <span class="mi">123</span>
-</pre></div>
-
-
-<ol>
-<li>配置3个哨兵，每个哨兵的配置都是一样的 …</li></ol> <a class="btn primary xsmall" href="/my-哨兵.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
 	<h2>django多对多操作</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
@@ -378,44 +206,57 @@ tags: <a href="/tag/django.html">django</a> </div>
 	</div>
 </div>	
 <div class='article'>
-	<h2>一对多系列化与反序列化</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-序列化-反序列化.html">2019-08-08 18:44:00+02:00</a>
+	<h2>django跨域与VUE跨域</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-跨域.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
  in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>DRF一对多序列化和反序列化</h2>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>Django 解决跨域</h2>
 <ul>
-<li><code>models.py</code></li>
+<li>安装 django-cors-headers</li>
 </ul>
-<div class="highlight"><pre><span></span>  <span class="c1"># 商品分类</span>
-  class Category<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-
-  <span class="c1"># 商品</span>
-  class Goods<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-      <span class="nv">price</span> <span class="o">=</span> models.DecimalField<span class="o">(</span><span class="nv">max_digits</span><span class="o">=</span><span class="m">9</span>,decimal_places<span class="o">=</span><span class="m">2</span><span class="o">)</span>
-      <span class="nv">cate</span> <span class="o">=</span> models.ForeignKey<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
+<div class="highlight"><pre><span></span>  pip install django-cors-headers
 </pre></div>
 
 
 <ul>
-<li><code>urls.py</code></li>
+<li>在 settings.py 的 install_apps 中注册</li>
 </ul>
-<div class="highlight"><pre><span></span>  from django.urls import path,include
-  from . import views
-  <span class="nv">urlpatterns …</span></pre></div> <a class="btn primary xsmall" href="/my-序列化-反序列化.html">more…</a>
+<div class="highlight"><pre><span></span>  <span class="nv">INSTALLED_APPS</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders&#39;</span>
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在settings.py 的 middleware 中注册</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">MIDDLEWARE</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders.middleware.CorsMiddleware&#39;</span>, <span class="c1"># 一定要在commonmiddleware之上</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span>,
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在 settings.py 的任意位置 添加</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">CORS_ORIGIN_ALLOW_ALL</span> <span class="o">=</span> True
+</pre></div>
+
+
+<ul>
+<li>完成django 跨域</li>
+</ul>
+<h2>VUE 解决跨域</h2>
+<ul>
+<li>打开config/index.js,在proxyTable中添写如下代码</li>
+</ul>
+<div class="highlight"><pre><span></span>proxyTable: <span class="o">{</span> 
+  <span class="s1">&#39;/api&#39;</span>: <span class="o">{</span>  //使用<span class="s2">&quot;/api&quot;</span>来代替<span class="s2">&quot;http …</span></pre></div> <a class="btn primary xsmall" href="/my-跨域.html">more…</a>
 	</div>
 </div>	
 
-<div class="pagination">
-<ul>
-		<li class="prev disabled"><a href="#">&larr; Previous</a></li>
-		<li class="active"><a href="/category/my-shang.html">1</a></li>
-		<li class=""><a href="/category/my-shang2.html">2</a></li>
-		<li class="next"><a href="/category/my-shang2.html">Next &rarr;</a></li>
-</ul>
-</div>
 
 		<footer>
 		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
