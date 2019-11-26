@@ -28,8 +28,10 @@
 		<div class="container-fluid">
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
+					<li ><a href="/category/django.html">Django</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
 					<li ><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
 			</ul>
 			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
 		</div>
@@ -44,13 +46,11 @@
 				<li><a href="http://getpelican.com/">Pelican</a></li>
 				<li><a href="http://python.org/">Python.org</a></li>
 				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-				<li><a href="#">You can modify those links in your config file</a></li>
 			</ul>
 			<div class="social">
 			<h3>Social</h3>
 			<ul>
-				<li><a href="#">You can add links in your config file</a></li>
-				<li><a href="#">Another social link</a></li>
+				<li><a href="https://shangxiaoweia.github.io">shangxwei</a></li>
 			</ul>
 			</div>
 		</div>
@@ -149,8 +149,8 @@ tags: <a href="/tag/myself.html">myself</a> </div>
 <h5>韩敏  1996年12月</h5>
 <h5>三年工作经验</h5>
 <h5>手机：15909542938</h5>
-<h5>邮箱：2036156267@qq.com</h5>
-<h5>个人网站：https://gitee.com/han520min</h5>
+<h5>邮箱：<strong>2036156267@qq.com</strong></h5>
+<h5>个人网站：<strong>https://gitee.com/han520min</strong></h5>
 <p>​                   <a href="https://han520min.github.io/"><strong>https://han520min.github.io</strong></a></p>
 <h2>个人简历</h2>
 <p>​           从事互联网事业已有三年，在这期间，有对<strong>django</strong>，<strong>flask</strong>等框架，对<strong>异步非阻塞</strong></p>
@@ -160,6 +160,100 @@ tags: <a href="/tag/myself.html">myself</a> </div>
 <h4>2012 - 2015  /   南开大学   本科（统招一本）</h4>
 <h2>技术点</h2>
 <p>一、精通 …</p> <a class="btn primary xsmall" href="/myself.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Django上传图片</h2>
+	<div class="well small">Permalink: <a class="more" href="/Django上传图片.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+	<div class="summary"><h1>最简单的保存图片与展示</h1>
+<ul>
+<li>
+<p>在Django里面</p>
+</li>
+<li>
+<p>根目录创建 static 文件夹</p>
+</li>
+<li>
+<p>settings</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>STATIC_URL = &#39;/static/&#39;
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &#39;static&#39;),
+)
+</pre></div>
+
+
+<ul>
+<li>views</li>
+</ul>
+<div class="highlight"><pre><span></span>from datetime import datetime
+class Addimg(APIView):
+    def post(self, request):
+       data = request.data
+        img = data.get(&#39;img&#39;)
+        now = datetime.strftime(datetime.now(), &#39;%Y%m%d%H%M%S%f&#39;)
+        with open(&#39;static/imgs/&#39; + now …</pre></div> <a class="btn primary xsmall" href="/Django上传图片.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Django抽象类</h2>
+	<div class="well small">Permalink: <a class="more" href="/Django抽象类.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+	<div class="summary"><h1>abstract</h1>
+<p>这个属性是定义当前的模型类是不是一个抽象类。所谓抽象类是不会对应数据库表的。一般我们用它来归纳一些公共属性字段，然后继承它的子类可以继承这些字段。比如下面的代码中Base是一个抽象类，Usermodel是一个继承了Base的子类，那么在运行生成命令时，不会生成Base表，但是会生成一个Usermodel表，它包含了Base中继承来的字段，以后如果再添加一个Kecheng模型类，它可以同样继承Base的公共属性：</p>
+<div class="highlight"><pre><span></span><span class="c1"># 抽象类</span>
+<span class="k">class</span> <span class="n">Base</span>(<span class="n">models</span>.<span class="n">Model</span>):
+    <span class="n">create_date</span> = <span class="n">models</span>.<span class="n">DateTimeField</span>(<span class="n">auto_now</span>=<span class="nb">True</span>)
+    <span class="n">update_date</span> = <span class="n">models</span>.<span class="n">DateTimeField</span>(<span class="n">auto_now_add</span>=<span class="nb">True</span>)
+
+    <span class="k">class</span> <span class="n">Meta:</span>
+        <span class="n">abstract</span> = <span class="nb">True</span>
+
+<span class="c1"># 用户表</span>
+<span class="k">class</span> <span class="n">Usermodel</span>(<span class="n">Base</span>):
+    <span class="nb">name</span> = <span class="n">models</span>.<span class="n">CharField</span>(<span class="n">max_length</span>=<span class="mi">32</span>)
+    <span class="n">pwd</span> = <span class="n">models</span>.<span class="n">CharField</span>(<span class="n">max_length</span>=<span class="mi">255</span>)
+
+<span class="c1"># 课程表</span>
+<span class="k">class</span> <span class="n">Kecheng</span>(<span class="n">Base …</span></pre></div> <a class="btn primary xsmall" href="/Django抽象类.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>VUE添加图片</h2>
+	<div class="well small">Permalink: <a class="more" href="/VUE添加图片.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/vue.html">VUE</a>
+tags: <a href="/tag/vue.html">VUE</a> </div>
+	<div class="summary"><h1>不多说直接上代码</h1>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;Daa_img&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;file&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;img&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span> <span class="nd">@click</span><span class="o">=</span><span class="s2">&quot;add&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;添加&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+  <span class="kn">import</span> <span class="nn">axios</span> <span class="nn">from</span> <span class="s1">&#39;axios&#39;</span>
+  <span class="n">export</span> <span class="n">default</span> <span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Daa_img&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">(){</span>
+      <span class="k">return</span><span class="p">{</span>
+        <span class="n">data</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">methods</span><span class="p">:{</span>
+      <span class="n">add</span><span class="p">(){</span>
+        <span class="n">let</span> <span class="n">datafrom</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FormData</span><span class="p">();</span>
+        <span class="n">datafrom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span><span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">axios</span><span class="p">({</span>
+          <span class="n">url</span><span class="p">:</span><span class="s1">&#39;http://127.0 …</span></pre></div> <a class="btn primary xsmall" href="/VUE添加图片.html">more…</a>
 	</div>
 </div>	
 <div class='article'>
@@ -310,101 +404,6 @@ p.page_range<span class="o">()</span> <span class="c1"># 列表形式返回当�
 <div class="highlight"><pre><span></span>page_1.number <span class="c1"># 当前页的页码</span>
 page_1.has_next<span class="o">()</span> <span class="c1"># 是否有下一页</span>
 page_1 …</pre></div> <a class="btn primary xsmall" href="/my-分页.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>redis哨兵模式</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-哨兵.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/redis.html">redis</a> </div>
-	<div class="summary"><h1>Redis哨兵(Sentinel)模式</h1>
-<h2>一、概述</h2>
-<p>哨兵通过发送命令。等待Redis服务器响应，从而监控运行的多个Redis实例</p>
-<p><img alt="1574609729003" src="http://c.biancheng.net/uploads/allimg/190725/5-1ZH51400314I.png"></p>
-<h3>哨兵作用</h3>
-<ul>
-<li>通过发送命令，让Redis服务器返回 监控其运行状态，包括主服务器和从服务器</li>
-<li>当哨兵监测到master宕机，会自动将slave(从)切换成master(主)，然后通过‘发布订阅模式’ 通知其他从服务器，修改配置文件，让他们切换主机</li>
-</ul>
-<h2>二、配置redis主从服务器</h2>
-<ol>
-<li>修改redis.conf</li>
-</ol>
-<div class="highlight"><pre><span></span>   <span class="c1"># redis服务器可以跨网络访问</span>
-   <span class="n">bind</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
-   <span class="c1"># 设置密码</span>
-   <span class="n">requirepass</span> <span class="s1">&#39;123&#39;</span>
-   <span class="c1"># 指定主服务器(只配置从服务器，主服务器不需要配置)</span>
-   <span class="n">slaveof</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.128</span> <span class="mi">6379</span>
-   <span class="c1"># 主服务器密码</span>
-   <span class="n">masterauth</span> <span class="mi">123</span>
-</pre></div>
-
-
-<ol>
-<li>配置3个哨兵，每个哨兵的配置都是一样的 …</li></ol> <a class="btn primary xsmall" href="/my-哨兵.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>django多对多操作</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/django.html">django</a> </div>
-	<div class="summary"><h2>django 多对多操作</h2>
-<ul>
-<li>模型</li>
-</ul>
-<div class="highlight"><pre><span></span>  from django.db import models
-
-  <span class="c1"># 老师</span>
-  class Teacher<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-
-  <span class="c1"># 学生</span>
-  class Student<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-      <span class="nv">teachers</span> <span class="o">=</span> models.ManyToManyField<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Teacher&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
-</pre></div>
-
-
-<ul>
-<li>查询</li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="c1"># 通过老师查学生</span>
-  <span class="nv">teacher</span> <span class="o">=</span> Teacher.objects.filter<span class="o">(</span><span class="nv">id</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>.first<span class="o">()</span>
-  <span class="nv">students</span> <span class="o">=</span> teacher.student_set.all<span class="o">()</span> <span class="c1"># 获取所有学生信息 …</span></pre></div> <a class="btn primary xsmall" href="/my-多对多.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>一对多系列化与反序列化</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-序列化-反序列化.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>DRF一对多序列化和反序列化</h2>
-<ul>
-<li><code>models.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="c1"># 商品分类</span>
-  class Category<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-
-  <span class="c1"># 商品</span>
-  class Goods<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-      <span class="nv">price</span> <span class="o">=</span> models.DecimalField<span class="o">(</span><span class="nv">max_digits</span><span class="o">=</span><span class="m">9</span>,decimal_places<span class="o">=</span><span class="m">2</span><span class="o">)</span>
-      <span class="nv">cate</span> <span class="o">=</span> models.ForeignKey<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
-</pre></div>
-
-
-<ul>
-<li><code>urls.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  from django.urls import path,include
-  from . import views
-  <span class="nv">urlpatterns …</span></pre></div> <a class="btn primary xsmall" href="/my-序列化-反序列化.html">more…</a>
 	</div>
 </div>	
 

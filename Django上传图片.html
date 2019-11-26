@@ -28,7 +28,7 @@
 		<div class="container-fluid">
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
-					<li ><a href="/category/django.html">Django</a></li>
+					<li class="active"><a href="/category/django.html">Django</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
 					<li ><a href="/category/my-shang.html">my-shang</a></li>
 					<li ><a href="/category/vue.html">VUE</a></li>
@@ -56,50 +56,77 @@
 		</div>
 	  </div>
 	  <div class="content">
-<div class="page-header"><h1>韩敏的技术博客 <small>rabbitmq</small></h1></div>
-<div class='article'>
-	<h2>rabbitmq</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-rabbitmq.html">2019-08-09 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/rabbitmq.html">rabbitmq</a> </div>
-	<div class="summary"><p>1.下载relang</p>
-<div class="highlight"><pre><span></span>yum install erlang
+	<div class='article'>
+		<div class="page-header"><h1>Django上传图片</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/Django上传图片.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+		<div><h1>最简单的保存图片与展示</h1>
+<ul>
+<li>
+<p>在Django里面</p>
+</li>
+<li>
+<p>根目录创建 static 文件夹</p>
+</li>
+<li>
+<p>settings</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>STATIC_URL = &#39;/static/&#39;
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &#39;static&#39;),
+)
 </pre></div>
 
 
-<p>2.下载rpm包</p>
-<div class="highlight"><pre><span></span> wget http://www.rabbitmq.com/releases/rabbitmq-server/v3.6.15/rabbitmq-server-3.6.15-1.el7.noarch.rpm
+<ul>
+<li>views</li>
+</ul>
+<div class="highlight"><pre><span></span>from datetime import datetime
+class Addimg(APIView):
+    def post(self, request):
+       data = request.data
+        img = data.get(&#39;img&#39;)
+        now = datetime.strftime(datetime.now(), &#39;%Y%m%d%H%M%S%f&#39;)
+        with open(&#39;static/imgs/&#39; + now + img.name, &#39;wb&#39;) as f:
+        f.write(img.read())
+        return Response({&#39;code&#39;: 200, &#39;message&#39;: &#39;成功&#39;})
 </pre></div>
 
 
-<p>3.下载完成后安装</p>
-<div class="highlight"><pre><span></span>yum install rabbitmq-server-3.6.15-1.el7.noarch.rpm
+<ul>
+<li>
+<p>看图片 或者在网页显示</p>
+</li>
+<li>
+<p>直接访问链接就可以 </p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>http://127.0.0.1:8000/static/图片名
 </pre></div>
 
 
-<p>4.安装完后重启服务</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server start
+<ul>
+<li>VUE 页面</li>
+</ul>
+<div class="highlight"><pre><span></span>&lt;img :src=&quot;img+da.img&quot; width=&quot;100px&quot; height=&quot;100px&quot;&gt;
+
+data() {
+   return {
+     data: &#39;&#39;,
+     img:&#39;http://127.0.0.1:8000/static/imgs/&#39;
+   }
+ },
 </pre></div>
 
 
-<p>5.查看服务状态</p>
-<div class="highlight"><pre><span></span>service rabbitmq-server status
-</pre></div>
-
-
-<ol>
-<li>安装插件</li>
-</ol>
-<div class="highlight"><pre><span></span>/sbin/rabbitmq-plugins <span class="nb">enable</span> rabbitmq_management 
-</pre></div>
-
-
-<p>7.重启服务 …</p> <a class="btn primary xsmall" href="/my-rabbitmq.html">more…</a>
+<ul>
+<li></li>
+</ul></div>
 	</div>
-</div>	
-
-
 		<footer>
 		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
 		  <p>&copy; 韩敏</p>

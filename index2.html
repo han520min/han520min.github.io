@@ -28,8 +28,10 @@
 		<div class="container-fluid">
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
+					<li ><a href="/category/django.html">Django</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
 					<li ><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
 			</ul>
 			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
 		</div>
@@ -44,19 +46,112 @@
 				<li><a href="http://getpelican.com/">Pelican</a></li>
 				<li><a href="http://python.org/">Python.org</a></li>
 				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-				<li><a href="#">You can modify those links in your config file</a></li>
 			</ul>
 			<div class="social">
 			<h3>Social</h3>
 			<ul>
-				<li><a href="#">You can add links in your config file</a></li>
-				<li><a href="#">Another social link</a></li>
+				<li><a href="https://shangxiaoweia.github.io">shangxwei</a></li>
 			</ul>
 			</div>
 		</div>
 	  </div>
 	  <div class="content">
 <div class="page-header"><h1> 韩敏的技术博客 </h1></div>
+<div class='article'>
+	<h2>redis哨兵模式</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-哨兵.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/redis.html">redis</a> </div>
+	<div class="summary"><h1>Redis哨兵(Sentinel)模式</h1>
+<h2>一、概述</h2>
+<p>哨兵通过发送命令。等待Redis服务器响应，从而监控运行的多个Redis实例</p>
+<p><img alt="1574609729003" src="http://c.biancheng.net/uploads/allimg/190725/5-1ZH51400314I.png"></p>
+<h3>哨兵作用</h3>
+<ul>
+<li>通过发送命令，让Redis服务器返回 监控其运行状态，包括主服务器和从服务器</li>
+<li>当哨兵监测到master宕机，会自动将slave(从)切换成master(主)，然后通过‘发布订阅模式’ 通知其他从服务器，修改配置文件，让他们切换主机</li>
+</ul>
+<h2>二、配置redis主从服务器</h2>
+<ol>
+<li>修改redis.conf</li>
+</ol>
+<div class="highlight"><pre><span></span>   <span class="c1"># redis服务器可以跨网络访问</span>
+   <span class="n">bind</span> <span class="mf">0.0</span><span class="o">.</span><span class="mf">0.0</span>
+   <span class="c1"># 设置密码</span>
+   <span class="n">requirepass</span> <span class="s1">&#39;123&#39;</span>
+   <span class="c1"># 指定主服务器(只配置从服务器，主服务器不需要配置)</span>
+   <span class="n">slaveof</span> <span class="mf">192.168</span><span class="o">.</span><span class="mf">11.128</span> <span class="mi">6379</span>
+   <span class="c1"># 主服务器密码</span>
+   <span class="n">masterauth</span> <span class="mi">123</span>
+</pre></div>
+
+
+<ol>
+<li>配置3个哨兵，每个哨兵的配置都是一样的 …</li></ol> <a class="btn primary xsmall" href="/my-哨兵.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django多对多操作</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>django 多对多操作</h2>
+<ul>
+<li>模型</li>
+</ul>
+<div class="highlight"><pre><span></span>  from django.db import models
+
+  <span class="c1"># 老师</span>
+  class Teacher<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+
+  <span class="c1"># 学生</span>
+  class Student<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+      <span class="nv">teachers</span> <span class="o">=</span> models.ManyToManyField<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Teacher&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li>查询</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 通过老师查学生</span>
+  <span class="nv">teacher</span> <span class="o">=</span> Teacher.objects.filter<span class="o">(</span><span class="nv">id</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>.first<span class="o">()</span>
+  <span class="nv">students</span> <span class="o">=</span> teacher.student_set.all<span class="o">()</span> <span class="c1"># 获取所有学生信息 …</span></pre></div> <a class="btn primary xsmall" href="/my-多对多.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>一对多系列化与反序列化</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-序列化-反序列化.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h2>DRF一对多序列化和反序列化</h2>
+<ul>
+<li><code>models.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 商品分类</span>
+  class Category<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+
+  <span class="c1"># 商品</span>
+  class Goods<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+      <span class="nv">price</span> <span class="o">=</span> models.DecimalField<span class="o">(</span><span class="nv">max_digits</span><span class="o">=</span><span class="m">9</span>,decimal_places<span class="o">=</span><span class="m">2</span><span class="o">)</span>
+      <span class="nv">cate</span> <span class="o">=</span> models.ForeignKey<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>urls.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  from django.urls import path,include
+  from . import views
+  <span class="nv">urlpatterns …</span></pre></div> <a class="btn primary xsmall" href="/my-序列化-反序列化.html">more…</a>
+	</div>
+</div>	
 <div class='article'>
 	<h2>VUE拦截器</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-拦截器.html">2019-08-08 18:44:00+02:00</a>
