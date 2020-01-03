@@ -29,9 +29,11 @@
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
 					<li class="active"><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
 					<li ><a href="/category/my-shang.html">my-shang</a></li>
 					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
 			</ul>
 			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
 		</div>
@@ -50,7 +52,7 @@
 			<div class="social">
 			<h3>Social</h3>
 			<ul>
-				<li><a href="https://shangxiaoweia.github.io">shangxwei</a></li>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
 			</ul>
 			</div>
 		</div>
@@ -60,7 +62,7 @@
 <div class='article'>
 	<h2>Django上传图片</h2>
 	<div class="well small">Permalink: <a class="more" href="/Django上传图片.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
  in <a href="/category/django.html">Django</a>
 tags: <a href="/tag/django.html">Django</a> </div>
 	<div class="summary"><h1>最简单的保存图片与展示</h1>
@@ -99,7 +101,7 @@ class Addimg(APIView):
 	<h2>Django抽象类</h2>
 	<div class="well small">Permalink: <a class="more" href="/Django抽象类.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
- in <a href="/category/django.html">Django</a>
+ in <a href="/category/django.html">django</a>
 tags: <a href="/tag/django.html">Django</a> </div>
 	<div class="summary"><h1>abstract</h1>
 <p>这个属性是定义当前的模型类是不是一个抽象类。所谓抽象类是不会对应数据库表的。一般我们用它来归纳一些公共属性字段，然后继承它的子类可以继承这些字段。比如下面的代码中Base是一个抽象类，Usermodel是一个继承了Base的子类，那么在运行生成命令时，不会生成Base表，但是会生成一个Usermodel表，它包含了Base中继承来的字段，以后如果再添加一个Kecheng模型类，它可以同样继承Base的公共属性：</p>
@@ -120,7 +122,308 @@ tags: <a href="/tag/django.html">Django</a> </div>
 <span class="k">class</span> <span class="n">Kecheng</span>(<span class="n">Base …</span></pre></div> <a class="btn primary xsmall" href="/Django抽象类.html">more…</a>
 	</div>
 </div>	
+<div class='article'>
+	<h2>Django126发送邮件</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-Django.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><ul>
+<li>首先取得网易授权</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="m">1</span>. 设置
+  <span class="m">2</span>.左侧客户端授权码
+  <span class="m">3</span>.自定义授权码 也就是你配置文件中的密码
+</pre></div>
 
+
+<ul>
+<li>配置文件</li>
+</ul>
+<div class="highlight"><pre><span></span>  邮件
+  <span class="nv">EMAIL_HOST</span> <span class="o">=</span> <span class="s1">&#39;smtp.126.com&#39;</span>
+  设置端口号，为数字
+  <span class="nv">EMAIL_PORT</span> <span class="o">=</span> <span class="m">25</span>
+  设置发件人邮箱
+  <span class="nv">EMAIL_HOST_USER</span> <span class="o">=</span> <span class="s1">&#39;fuchongjun@126.com&#39;</span>
+  设置发件人 授权码
+  <span class="nv">EMAIL_HOST_PASSWORD</span> <span class="o">=</span> <span class="s1">&#39;ice115816&#39;</span>
+  设置是否启用安全链接
+  <span class="nv">EMAIL_USER_TLS</span> <span class="o">=</span> True
+  <span class="nv">EMAIL_USER_TLS</span> <span class="o">=</span> False
+  <span class="nv">DEFAULT_FROM_EMAIL</span> <span class="o">=</span> EMAIL_HOST_USER
+</pre></div>
+
+
+<ul>
+<li>views.py</li>
+</ul>
+<p><code>`shell
+  from django.core.mail import send_email
+  from django.conf import settings
+  def sendMsg …</code></p> <a class="btn primary xsmall" href="/my-Django.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django跨域与VUE跨域</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-一对多.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>Django一对多查询</h2>
+<ul>
+<li><code>models.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="kn">from</span> <span class="nn">django.db</span> <span class="kn">import</span> <span class="n">models</span>
+
+  <span class="c1"># 创建用户</span>
+  <span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+      <span class="n">name</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+  <span class="c1"># 创建书籍  </span>
+  <span class="k">class</span> <span class="nc">Book</span><span class="p">(</span><span class="n">models</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+      <span class="n">title</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">CharField</span><span class="p">(</span><span class="n">max_length</span><span class="o">=</span><span class="mi">32</span><span class="p">)</span>
+      <span class="n">us</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Foreign</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">,</span><span class="n">on_delete</span><span class="o">=</span><span class="n">models</span><span class="o">.</span><span class="n">CASCADE</span><span class="p">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>views.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="kn">from</span> <span class="nn">django.shortcus</span> <span class="kn">import</span> <span class="n">render</span><span class="p">,</span><span class="n">HttpResponse</span>
+  <span class="kn">import</span> <span class="nn">models</span>
+  <span class="c1"># 通过人查询书</span>
+  <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
+      <span class="n">user …</span></pre></div> <a class="btn primary xsmall" href="/my-一对多.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django多对多操作</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>django 多对多操作</h2>
+<ul>
+<li>模型</li>
+</ul>
+<div class="highlight"><pre><span></span>  from django.db import models
+
+  <span class="c1"># 老师</span>
+  class Teacher<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+
+  <span class="c1"># 学生</span>
+  class Student<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+      <span class="nv">teachers</span> <span class="o">=</span> models.ManyToManyField<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Teacher&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li>查询</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 通过老师查学生</span>
+  <span class="nv">teacher</span> <span class="o">=</span> Teacher.objects.filter<span class="o">(</span><span class="nv">id</span><span class="o">=</span><span class="m">1</span><span class="o">)</span>.first<span class="o">()</span>
+  <span class="nv">students</span> <span class="o">=</span> teacher.student_set.all<span class="o">()</span> <span class="c1"># 获取所有学生信息 …</span></pre></div> <a class="btn primary xsmall" href="/my-多对多.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>一对多系列化与反序列化</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-序列化-反序列化.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h2>DRF一对多序列化和反序列化</h2>
+<ul>
+<li><code>models.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="c1"># 商品分类</span>
+  class Category<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+
+  <span class="c1"># 商品</span>
+  class Goods<span class="o">(</span>models.Model<span class="o">)</span>:
+      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
+      <span class="nv">price</span> <span class="o">=</span> models.DecimalField<span class="o">(</span><span class="nv">max_digits</span><span class="o">=</span><span class="m">9</span>,decimal_places<span class="o">=</span><span class="m">2</span><span class="o">)</span>
+      <span class="nv">cate</span> <span class="o">=</span> models.ForeignKey<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
+</pre></div>
+
+
+<ul>
+<li><code>urls.py</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  from django.urls import path,include
+  from . import views
+  <span class="nv">urlpatterns …</span></pre></div> <a class="btn primary xsmall" href="/my-序列化-反序列化.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>支付宝沙箱模式</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-支付宝沙箱.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h3>支付宝支付</h3>
+<ul>
+<li>安装模块</li>
+</ul>
+<div class="highlight"><pre><span></span>  pip install Crypto 
+  pip install pycryptodome
+  pip install python-alipay-sdk
+</pre></div>
+
+
+<ul>
+<li>
+<p>下载RSA工具
+  <img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134351045-2102495901.png"></p>
+</li>
+<li>
+<p>将生成的公钥上传到支付宝沙箱的RSA2(SHA256)密钥(推荐）处</p>
+</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134403625-1800493074.jpg"></p>
+<ul>
+<li>设置公钥后会生成一个支付宝公钥，将其复制</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134416436-1047655704.png"></p>
+<ul>
+<li>然后将其写入一个文件 <code>alipay_pulic_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN PUBLIC KEY-----
+  MIGfMA0GCSqGSIb3DQEBAQUAA4GNIgHnOn7LLILlKETd6BFRJ0GqgS2Y3mn1wMQmyh9zEyWlz5p1zrahRahbXAfCfSqshSNfqOmAQzSHRVjCqjsAw1jyqrXaPdKBmr90DIpIxmIyKXv4GGAkPyJ/6FTFY99uhpiq0qadD/uSzQsefWo0aTvP/65zi3eof7TcZ32oWpwIDAQAB
+  -----END PUBLIC KEY-----
+</pre></div>
+
+
+<ul>
+<li>把之前生成的私钥也写入另外一个文件 <code>app_private_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN RSA PRIVATE KEY-----
+  MIIEowIBAAKCAQEAgxk5N/XQkRatTn56TxGo8nVGk4YKb7VheSDtcLezj7sDdibVamrWz/77VG1GY17Q2jOnCoHpngWDsJybZ/5icblvk3I76H5GT+zjYMBbHXfAlnRB7BG6+Vo7YWe442S0E+A8z8N+R3MArSb3+Coht+8JgvGNdsVE9u2upmxq4GHMKDu/TY3Q7lPIXW3iL6Kxn …</pre></div> <a class="btn primary xsmall" href="/my-支付宝沙箱.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django跨域与VUE跨域</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-跨域.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>Django 解决跨域</h2>
+<ul>
+<li>安装 django-cors-headers</li>
+</ul>
+<div class="highlight"><pre><span></span>  pip install django-cors-headers
+</pre></div>
+
+
+<ul>
+<li>在 settings.py 的 install_apps 中注册</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">INSTALLED_APPS</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders&#39;</span>
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在settings.py 的 middleware 中注册【8</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">MIDDLEWARE</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders.middleware.CorsMiddleware&#39;</span>, <span class="c1"># 一定要在commonmiddleware之上</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span>,
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在 settings.py 的任意位置 添加</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">CORS_ORIGIN_ALLOW_ALL</span> <span class="o">=</span> True
+</pre></div>
+
+
+<ul>
+<li>完成django 跨域</li>
+</ul>
+<h2>VUE 解决跨域</h2>
+<ul>
+<li>打开config/index.js,在proxyTable中添写如下代码</li>
+</ul>
+<div class="highlight"><pre><span></span>proxyTable: <span class="o">{</span> 
+  <span class="s1">&#39;/api&#39;</span>: <span class="o">{</span>  //使用<span class="s2">&quot;/api&quot;</span>来代替 …</pre></div> <a class="btn primary xsmall" href="/my-跨域.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django序列化</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-django序列化.html">2018-10-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/hanmin.html">hanmin</a> </div>
+	<div class="summary"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rest_framework</span> <span class="kn">import</span> <span class="n">serializers</span>
+<span class="kn">from</span> <span class="nn">myapp.models</span> <span class="nn">im</span>
+<span class="n">port</span> <span class="o">*</span>
+
+<span class="k">class</span> <span class="nc">UserSer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">User</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;__all__&quot;</span>
+
+<span class="k">class</span> <span class="nc">CategorySer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Category</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;__all__&quot;</span>
+
+<span class="k">class</span> <span class="nc">CourseSer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Course</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;__all__&quot;</span>
+
+<span class="k">class</span> <span class="nc">CommentSer</span><span class="p">(</span><span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span><span class="p">):</span>
+    <span class="k">class</span> <span class="nc">Meta</span><span class="p">:</span>
+        <span class="n">model</span> <span class="o">=</span> <span class="n">Comment</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="s2">&quot;__all__&quot;</span>
+
+
+<span class="k">class …</span></pre></div> <a class="btn primary xsmall" href="/my-django序列化.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>加密</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-加密.html">2018-10-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
+tags: <a href="/tag/hanmin.html">hanmin</a> </div>
+	<div class="summary"><div class="highlight"><pre><span></span># 加密方法
+<span class="nv">def</span> <span class="nv">make_password</span><span class="ss">(</span><span class="nv">mypass</span><span class="ss">)</span>:
+    # <span class="nv">md5</span>算法
+    <span class="nv">mypass</span> <span class="o">=</span> <span class="nv">hashlib</span>.<span class="nv">md5</span><span class="ss">()</span>
+    # 对字符串进行编译<span class="ss">(</span>加盐操作<span class="ss">)</span>
+    <span class="nv">mypass</span>.<span class="nv">update</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">123</span><span class="s1">&#39;</span>.<span class="nv">encode</span><span class="ss">(</span><span class="nv">encoding</span><span class="o">=</span><span class="s1">&#39;</span><span class="s">utf-8</span><span class="s1">&#39;</span><span class="ss">))</span>
+    # 返回密文
+    <span class="k">return</span> <span class="nv">mypass</span>.<span class="nv">hexdigest</span><span class="ss">()</span>
+
+
+# 登录接口
+<span class="nv">class</span> <span class="nv">Login</span><span class="ss">(</span><span class="nv">APIView</span><span class="ss">)</span>:
+    <span class="nv">def</span> <span class="nv">post</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">request</span><span class="ss">)</span>:
+        # 接收参数
+        <span class="nv">username</span> <span class="o">=</span> <span class="nv">request</span>.<span class="nv">POST</span>.<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">username</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">未收到用户名</span><span class="s1">&#39;</span><span class="ss">)</span>
+        <span class="nv">password</span> <span class="o">=</span> <span class="nv">request</span>.<span class="nv">POST</span>.<span class="nv">get</span><span class="ss">(</span><span class="s1">&#39;</span><span class="s">password</span><span class="s1">&#39;</span>, <span class="s1">&#39;</span><span class="s">未收到密码</span><span class="s1">&#39;</span><span class="ss">)</span>
+
+        # 查询数据
+        <span class="nv">user</span> <span class="o">=</span> <span class="nv">User</span>.<span class="nv">objects</span>.<span class="nv">filter</span><span class="ss">(</span><span class="nv">username</span><span class="o">=</span><span class="nv">username</span>, <span class="nv">password …</span></pre></div> <a class="btn primary xsmall" href="/my-加密.html">more…</a>
+	</div>
+</div>	
+
+<div class="pagination">
+<ul>
+		<li class="prev disabled"><a href="#">&larr; Previous</a></li>
+		<li class="active"><a href="/category/django.html">1</a></li>
+		<li class=""><a href="/category/django2.html">2</a></li>
+		<li class="next"><a href="/category/django2.html">Next &rarr;</a></li>
+</ul>
+</div>
 
 		<footer>
 		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>

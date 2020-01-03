@@ -29,9 +29,11 @@
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
 					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
 					<li ><a href="/category/my-shang.html">my-shang</a></li>
 					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
 			</ul>
 			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
 		</div>
@@ -50,7 +52,7 @@
 			<div class="social">
 			<h3>Social</h3>
 			<ul>
-				<li><a href="https://shangxiaoweia.github.io">shangxwei</a></li>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
 			</ul>
 			</div>
 		</div>
@@ -163,10 +165,79 @@ tags: <a href="/tag/myself.html">myself</a> </div>
 	</div>
 </div>	
 <div class='article'>
-	<h2>Django126发送邮件</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-126.html">2019-08-08 18:44:00+02:00</a>
+	<h2>Django上传图片</h2>
+	<div class="well small">Permalink: <a class="more" href="/Django上传图片.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+	<div class="summary"><h1>最简单的保存图片与展示</h1>
+<ul>
+<li>
+<p>在Django里面</p>
+</li>
+<li>
+<p>根目录创建 static 文件夹</p>
+</li>
+<li>
+<p>settings</p>
+</li>
+</ul>
+<div class="highlight"><pre><span></span>STATIC_URL = &#39;/static/&#39;
+
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, &#39;static&#39;),
+)
+</pre></div>
+
+
+<ul>
+<li>views</li>
+</ul>
+<div class="highlight"><pre><span></span>from datetime import datetime
+class Addimg(APIView):
+    def post(self, request):
+       data = request.data
+        img = data.get(&#39;img&#39;)
+        now = datetime.strftime(datetime.now(), &#39;%Y%m%d%H%M%S%f&#39;)
+        with open(&#39;static/imgs/&#39; + now …</pre></div> <a class="btn primary xsmall" href="/Django上传图片.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>VUE添加图片</h2>
+	<div class="well small">Permalink: <a class="more" href="/VUE添加图片.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/vue.html">VUE</a>
+tags: <a href="/tag/vue.html">VUE</a> </div>
+	<div class="summary"><h1>不多说直接上代码</h1>
+<div class="highlight"><pre><span></span><span class="o">&lt;</span><span class="n">template</span><span class="o">&gt;</span>
+  <span class="o">&lt;</span><span class="n">div</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;Daa_img&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;file&quot;</span> <span class="nb">id</span><span class="o">=</span><span class="s2">&quot;img&quot;</span><span class="o">&gt;</span>
+    <span class="o">&lt;</span><span class="nb">input</span> <span class="nb">type</span><span class="o">=</span><span class="s2">&quot;button&quot;</span> <span class="nd">@click</span><span class="o">=</span><span class="s2">&quot;add&quot;</span> <span class="n">value</span><span class="o">=</span><span class="s2">&quot;添加&quot;</span><span class="o">&gt;</span>
+  <span class="o">&lt;/</span><span class="n">div</span><span class="o">&gt;</span>
+<span class="o">&lt;/</span><span class="n">template</span><span class="o">&gt;</span>
+
+<span class="o">&lt;</span><span class="n">script</span><span class="o">&gt;</span>
+  <span class="kn">import</span> <span class="nn">axios</span> <span class="nn">from</span> <span class="s1">&#39;axios&#39;</span>
+  <span class="n">export</span> <span class="n">default</span> <span class="p">{</span>
+    <span class="n">name</span><span class="p">:</span> <span class="s2">&quot;Daa_img&quot;</span><span class="p">,</span>
+    <span class="n">data</span><span class="p">(){</span>
+      <span class="k">return</span><span class="p">{</span>
+        <span class="n">data</span><span class="p">:</span><span class="s1">&#39;&#39;</span><span class="p">,</span>
+      <span class="p">}</span>
+    <span class="p">},</span>
+    <span class="n">methods</span><span class="p">:{</span>
+      <span class="n">add</span><span class="p">(){</span>
+        <span class="n">let</span> <span class="n">datafrom</span> <span class="o">=</span> <span class="n">new</span> <span class="n">FormData</span><span class="p">();</span>
+        <span class="n">datafrom</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">,</span><span class="n">document</span><span class="o">.</span><span class="n">getElementById</span><span class="p">(</span><span class="s1">&#39;img&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">files</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+        <span class="n">axios</span><span class="p">({</span>
+          <span class="n">url</span><span class="p">:</span><span class="s1">&#39;http://127.0 …</span></pre></div> <a class="btn primary xsmall" href="/VUE添加图片.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>Django126发送邮件</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-Django.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">django</a>
 tags: <a href="/tag/django.html">django</a> </div>
 	<div class="summary"><ul>
 <li>首先取得网易授权</li>
@@ -201,14 +272,14 @@ tags: <a href="/tag/django.html">django</a> </div>
 <p><code>`shell
   from django.core.mail import send_email
   from django.conf import settings
-  def sendMsg …</code></p> <a class="btn primary xsmall" href="/my-126.html">more…</a>
+  def sendMsg …</code></p> <a class="btn primary xsmall" href="/my-Django.html">more…</a>
 	</div>
 </div>	
 <div class='article'>
 	<h2>GIT</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-Git.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
+ in <a href="/category/git.html">GIT</a>
 tags: <a href="/tag/django.html">django</a> </div>
 	<div class="summary"><h1>Git</h1>
 <h2>创建账号</h2>
@@ -251,7 +322,7 @@ tags: <a href="/tag/django.html">django</a> </div>
 	<h2>django跨域与VUE跨域</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-一对多.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
+ in <a href="/category/django.html">django</a>
 tags: <a href="/tag/django.html">django</a> </div>
 	<div class="summary"><h2>Django一对多查询</h2>
 <ul>
@@ -277,39 +348,6 @@ tags: <a href="/tag/django.html">django</a> </div>
   <span class="c1"># 通过人查询书</span>
   <span class="k">def</span> <span class="nf">index</span><span class="p">(</span><span class="n">request</span><span class="p">):</span>
       <span class="n">user …</span></pre></div> <a class="btn primary xsmall" href="/my-一对多.html">more…</a>
-	</div>
-</div>	
-<div class='article'>
-	<h2>django分页组件（paginator）</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-分页.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h1>Django分页组件(paginator)</h1>
-<blockquote>
-<p><code>shell
-from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger</code></p>
-</blockquote>
-<div class="highlight"><pre><span></span>  Paginator
-</pre></div>
-
-
-<p>：创建分页对象</p>
-<p>### 分页对象内置属性</p>
-<div class="highlight"><pre><span></span><span class="nv">all_</span> <span class="o">=</span> models.objects.all<span class="o">()</span>
-<span class="nv">p</span> <span class="o">=</span> Paginator<span class="o">(</span>all_, <span class="m">10</span><span class="o">)</span>
-<span class="c1"># 分页all_数据，每页显示10条数据</span>
-p.count <span class="c1"># 总数据量</span>
-p.num_pages<span class="o">()</span> <span class="c1"># 分页数</span>
-p.page_range<span class="o">()</span> <span class="c1"># 列表形式返回当前可有的页数 [1,2,3]</span>
-<span class="nv">page_1</span> <span class="o">=</span> p.page<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="c1"># 选择第一页，返回第一页数据对象</span>
-</pre></div>
-
-
-<h3>某一页内置属性</h3>
-<div class="highlight"><pre><span></span>page_1.number <span class="c1"># 当前页的页码</span>
-page_1.has_next<span class="o">()</span> <span class="c1"># 是否有下一页</span>
-page_1 …</pre></div> <a class="btn primary xsmall" href="/my-分页.html">more…</a>
 	</div>
 </div>	
 <div class='article'>
@@ -350,7 +388,7 @@ tags: <a href="/tag/redis.html">redis</a> </div>
 	<h2>django多对多操作</h2>
 	<div class="well small">Permalink: <a class="more" href="/my-多对多.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
+ in <a href="/category/django.html">django</a>
 tags: <a href="/tag/django.html">django</a> </div>
 	<div class="summary"><h2>django 多对多操作</h2>
 <ul>
@@ -377,42 +415,13 @@ tags: <a href="/tag/django.html">django</a> </div>
   <span class="nv">students</span> <span class="o">=</span> teacher.student_set.all<span class="o">()</span> <span class="c1"># 获取所有学生信息 …</span></pre></div> <a class="btn primary xsmall" href="/my-多对多.html">more…</a>
 	</div>
 </div>	
-<div class='article'>
-	<h2>一对多系列化与反序列化</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-序列化-反序列化.html">2019-08-08 18:44:00+02:00</a>
-by <a class="url fn" href="/author/han-min.html">韩敏 </a>
- in <a href="/category/my-shang.html">my-shang</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h2>DRF一对多序列化和反序列化</h2>
-<ul>
-<li><code>models.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  <span class="c1"># 商品分类</span>
-  class Category<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-
-  <span class="c1"># 商品</span>
-  class Goods<span class="o">(</span>models.Model<span class="o">)</span>:
-      <span class="nv">name</span> <span class="o">=</span> models.CharField<span class="o">(</span><span class="nv">max_length</span><span class="o">=</span><span class="m">32</span><span class="o">)</span>
-      <span class="nv">price</span> <span class="o">=</span> models.DecimalField<span class="o">(</span><span class="nv">max_digits</span><span class="o">=</span><span class="m">9</span>,decimal_places<span class="o">=</span><span class="m">2</span><span class="o">)</span>
-      <span class="nv">cate</span> <span class="o">=</span> models.ForeignKey<span class="o">(</span><span class="nv">to</span><span class="o">=</span><span class="s1">&#39;Category&#39;</span>,on_delete<span class="o">=</span>models.CASCADE<span class="o">)</span>
-</pre></div>
-
-
-<ul>
-<li><code>urls.py</code></li>
-</ul>
-<div class="highlight"><pre><span></span>  from django.urls import path,include
-  from . import views
-  <span class="nv">urlpatterns …</span></pre></div> <a class="btn primary xsmall" href="/my-序列化-反序列化.html">more…</a>
-	</div>
-</div>	
 
 <div class="pagination">
 <ul>
 		<li class="prev disabled"><a href="#">&larr; Previous</a></li>
 		<li class="active"><a href="/author/han-min.html">1</a></li>
 		<li class=""><a href="/author/han-min2.html">2</a></li>
+		<li class=""><a href="/author/han-min3.html">3</a></li>
 		<li class="next"><a href="/author/han-min2.html">Next &rarr;</a></li>
 </ul>
 </div>
