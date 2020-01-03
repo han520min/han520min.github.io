@@ -28,10 +28,18 @@
 		<div class="container-fluid">
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
 					<li ><a href="/category/django.html">Django</a></li>
 					<li class="active"><a href="/category/git.html">GIT</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
-					<li ><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
 					<li ><a href="/category/vue.html">VUE</a></li>
 					<li ><a href="/category/yun-wei.html">运维</a></li>
 			</ul>
@@ -63,7 +71,7 @@
 		<div class="well small">Permalink: <a class="more" href="/my-Git.html">2019-08-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
  in <a href="/category/git.html">GIT</a>
-tags: <a href="/tag/django.html">django</a> </div>
+tags: <a href="/tag/git.html">GIT</a> </div>
 		<div><h1>Git</h1>
 <h2>创建账号</h2>
 <ul>
@@ -144,7 +152,513 @@ git pull origin                           <span class="c1"># 拉取文件</span>
 <h2>git 常用命令</h2>
 <div class="highlight"><pre><span></span>git status
 git 
-</pre></div></div>
+</pre></div>
+
+
+<h2>git包括</h2>
+<p>​   1、工作区（电脑看到 的目录，写代码的地方）</p>
+<p>​   2、暂存区：代码提交，暂存在暂存区</p>
+<p>​   3、版本仓库：将暂存区的代码提交在线上</p>
+<h2>本地git基本命令</h2>
+<p>1.回滚</p>
+<p>​   git log        #版本号，提交仓库日志，版本记录</p>
+<p>2.撤销修改</p>
+<p>​   git add .     #提交暂存区</p>
+<p>​   git reset  HEAD Readme    # 从暂存区撤回到工作区</p>
+<p>​   git status   #查看目前工作区状态</p>
+<p>​   git checkout  --Readme   #将readme在工作区错误的代码丢弃</p>
+<h2></h2>
+<h3>1.1 常见版本管理工具介绍 及 版本工具作用</h3>
+<p><strong>1. 为什么要使用版本控制</strong></p>
+<p><strong>1、举例说明：</strong></p>
+<p>1）假设你在的公司要上线一个新功能，你们开发团队为实现这个新功能，写了大约5000行代码，上线没2
+　　　　　　     天，就发现这个功能用户并不喜欢，你老板让你去掉这个功能，你怎么办？
+　　　　　　2）你说简单，直接把5000行代码去掉就行了，但是我的亲，说的简单，你的这个功能写了3周时间，但你
+　　　　　　     还能记得你是新增加了哪5000行代码么？
+　　　　　　3）所以你急需要一个工具，能帮你记录每次对代码做了哪些修改，并且可以轻易的把代码回滚到历史上的
+　　　　　　     某个状态。 这个神奇的工具就叫做版本控制</p>
+<p><strong>2</strong>、<strong>版本控制工具主要实现</strong>2<strong>个功能</strong></p>
+<p><strong>1</strong>）<strong>版本管理</strong></p>
+<p>在开发中，这是刚需，必须允许可以很容易对产品的版本进行任意回滚，版本控制工具实现这个功能的
+　　　　　　　　　　原理简单来讲，就是你每修改一次代码，它就帮你做一次快照</p>
+<p><strong>2</strong>）<strong>协作开发</strong></p>
+<p>a. 一个复杂点的软件，往往不是一个开发人员可以搞定的，公司为加快产品开发速度，会招聘一堆跟
+　　　　　　　　　　    你一样的开发人员开发这个产品
+　　　　　　　　　　b. 拿微信来举例，现在假设3个人一起开发微信，A开发联系人功能，B开发发文字、图片、语音通讯
+　　　　　　　　　　    功能，C开发视频通话功能， B和C的功能都是要基于通讯录的
+　　　　　　　　　　c. 你说简单，直接把A开发的代码copy过来，在它的基础上开发就好了，可以，但是你在他的代码基
+　　　　　　　　　　    础上开发了2周后，这期间A没闲着，对通讯录代码作了更新，此时怎么办？你和他的代码不一致
+　　　　　　　　　　d. 此时我们知道，你肯定要再把A的新代码拿过来替换掉你手上的旧通讯录功能代码， 现在人少，3
+　　　　　　　　　　    个人之间沟通很简单，但想想，如果团队变成30个人呢？
+　　　　　　　　　　e. 来回这样copy代码，很快就乱了， 所以此时亟需一个工具，能确保一直存储最新的代码库，所有
+　　　　　　　　　　    人的代码应该和最新的代码库保持一致</p>
+<p><strong>2. 常见版本管理工具介绍</strong></p>
+<p><strong>1、SVN --CollabNet Subversion</strong></p>
+<p>1. SVN是集中式版本控制系统，版本库是集中放在中央服务器的，而干活的时候，用的都是自己的电脑，
+　　　　　　　　2. 所以首先要从中央服务器哪里得到最新的版本，然后干活，干完后，需要把自己做完的活推送到中央服务器。
+　　　　　　　　3. 集中式版本控制系统是必须联网才能工作，如果在局域网还可以，带宽够大，速度够快，如果在互联网下，如果网速慢的话，就纳闷了。</p>
+<p>​              <strong>2、GIT</strong></p>
+<p>1. Git是分布式版本控制系统，那么它就没有中央服务器的，每个人的电脑就是一个完整的版本库，
+　　　　　　　　2. 这样，工作的时候就不需要联网了，因为版本都是在自己的电脑上。
+　　　　　　　　3. 你们两之间只需把各自的修改推送给对方，就可以互相看到对方的修改了，当然也可以推送到git的仓库中，比如GitHub</p>
+<h3>1.2 git、GitHub和SVN比较</h3>
+<p><strong>1．Git</strong></p>
+<p>1、git是一个版本管理工具，是可以在你电脑不联网的情况下，只在本地使用的一个版本管理工具
+　　　　　　2、其作用就是可以让你更好的管理你的程序，比如你原来提交过的内容，以后虽然修改了，但是通过git这个
+　　　　 　　    工具，可以把你原来提交的内容重现出来</p>
+<p><strong>2. GitHub</strong></p>
+<p>1、github是一个网站，就是每个程序员自己写的程序，可以在github上建立一个网上的仓库，
+　　　　　　2、你每次提交的时候可以把代码提交到网上，，这样你的每次提交，别人也都可以看到你的代码，同时别人也
+　　　　　　     可以帮你修改你的代码，这种开源的方式非常方便程序员之间的交流和学习
+　　　　　　3、github是一个非常适合程序员交流的网站，很多国际上的技术大牛都在github上有自己的开源代码，其他
+　　　　　　     人只要申请个账号就可以随意的看到这些大牛写的程序
+　　　　　　<strong>总结：</strong> git可以认为是一个软件，能够帮你更好的写程序，github则是一个网站，这个网站可以帮助程序员之间互相交流和学习。</p>
+<p><strong>3. SVN</strong>与<strong>git</strong>比较</p>
+<p>1、Git是分布式的，SVN是集中式的，好处是跟其他同事不会有太多的冲突，自己写的代码放在自己电脑上，
+　　　　　　      一段时间后再提交、合并，也可以不用联网在本地提交
+　　　　　　2、Git下载下来后，在本地不必联网就可以看到所有的log，很方便学习，SVN却需要联网；
+　　　　　　3、Git鼓励分Branch，而SVN，说实话，我用Branch的次数还挺少的，SVN自带的Branch merge我还真没用过
+　　　　　　4、SVN在Commit前，我们都建议是先Update一下，跟本地的代码编译没问题，并确保开发的功能正常后再
+　　　　　　     提交，这样其实挺麻烦的，有好几次同事没有先Updat，Commit了，发生了一些错误，Git可能这种情况</p>
+<h3>1.3 本地git基本使用命令</h3>
+<p><strong>1. 创建git版本库</strong>
+　　　　　　1、版本库又名仓库，英文名repository，你可以简单理解成一个目录，
+　　　　　　2、这个目录里面的所有文件都可以被Git管理起来，每个文件的修改、删除，Git都能跟踪，以便任何时刻都
+　　　　　　     可以追踪历史，或者在将来某个时刻可以“还原”。
+　　　　　　3、所以，创建一个版本库非常简单，首先，选择一个合适的地方，创建一个空目
+　　　　　　4、瞬间Git就把仓库建好了，而且告诉你是一个空的仓库（empty Git repository）
+　　　　　　5、细心的读者可以发现当前目录下多了一个.git的目录，这个目录是Git来跟踪管理版本库的，没事千万不要
+　　　　　　     手动修改这个目录里面的文件，不然改乱了，就把Git仓库给破坏了。</p>
+<div class="highlight"><pre><span></span>　　<span class="n">mkdir</span> <span class="n">s15_gitpro</span>                 <span class="o">#</span><span class="err">先创建一个项目</span>
+　　<span class="n">cd</span> <span class="n">s15_gitpro</span><span class="o">/</span>                   <span class="o">#</span><span class="err">切换到这个项目目录</span>
+　　<span class="n">git</span> <span class="n">init</span>                         <span class="o">#</span><span class="err">初始化这个</span>
+</pre></div>
+
+
+<p><strong>2. 工作区、暂存区、代码仓库</strong>
+　　　　　　1、<strong>工作区：</strong> 就是你在电脑上看到的目录，比如目录下testgit里的文件(.git隐藏目录版本库除外)。
+　　　　　　2、<strong>暂存区 :</strong>  暂存区就是文件夹 .git中的一个小部分（.git文件夹就是版本库）
+　　　　　　3、<strong>版本库：</strong>工作区有一个隐藏目录.git,这个不属于工作区，这是版本库，  版本库中还有Git为我们
+　　　　　　                   自动创建了第一个分支master,以及指向master的一个指针HEAD</p>
+<p><strong>4、 把文件添加到版本库分为以下三步：</strong>
+　　　　　　　　1）vim Readme                        #工作区（Working Zone） 比如在mkdir s15_gitpro下执行创建文件命令
+　　　　　　　　2）git add                                 #暂存区（Stage zone）
+　　　　　　　　3）git commit                           #代码仓库（Repository master） 只有提交到代码库才能被git管理</p>
+<p><strong>3、本地git基本命令</strong></p>
+<p><strong>1、将文件添加到仓库</strong>
+　　　　　　　　git add Readme                       #指定将Readme文件添加到暂存区
+　　　　　　　　git add .                                   #将当前目录中的所有文件全部添加到暂存区
+　　　　　　　　git status                                 #查看更改了哪些，创建了哪些，哪些没有添加到仓库，哪些添加到了仓库
+　　　　　　　　git status diff readme              #查看readme文件具体修改了哪些
+　　　　　　　　git commit -m "commit tag"     # git commit告诉Git，把文件提交到仓库-m后面输入的是本次提交的说明(版本名字)</p>
+<p><strong>说明：</strong>
+　　　　　　　　　　# 执行git commit 命令时必须配置用户信息
+　　　　　　　　　　git config --global user.name "Tom Git"
+　　　　　　　　　　git config --global user.email tom@example.com</p>
+<p><strong>2、回滚</strong>
+　　　　　　　　git log                                         #查看所有提交到仓库的版本记录:   git log -2
+　　　　　　　　git reflog                                     #查看所有操作记录（状态的md5值和改变的值）
+　　　　　　　　git reset --hard d9e0ed0            #回到指定版本（d9e0ed0是创建版本的MD5值得前6位或者7位）
+　　　　　　　　git reset --hard HEAD^               #回到上一个版本
+　　　　　　　　注：这样可以回到第一次提交到仓库的状态，但再使用git log看不到其他几次的md5值了</p>
+<p><strong>3、撤销修改</strong></p>
+<p>vim Readme                               #我们在Readme文件中写了一些错误的代码
+　　　　　　　　git add .                                      #然后又一不小心将文件从工作区提交到了 stage区
+　　　　　　　　git reset HEAD Readme            #将Readme中刚提交到 stage区 的代码撤回到工作区
+　　　　　　　　git status                                    #查看目前工作区状态
+　　　　　　　　git checkout -- Readme             #将Readme在工作区错误的代码丢弃</p>
+<p><strong>4、删除操作（两种方法）</strong></p>
+<p><strong>方法1：</strong>这种方法需要执行git add .  </p>
+<p>rm Readme
+　　　　　　　　　　git add .
+　　　　　　　　　　git commit -m "delete file by git rm"
+　　　　　　　　　　git reset --hard HEAD^</p>
+<p><strong>方法</strong>2<strong>：</strong>这种方法可以省去执行git add .</p>
+<p>git rm Readme
+　　　　　　　　　　git commit -m "delete file by git rm"
+　　　　　　　　　　git reset --hard HEAD^</p>
+<p><strong>注：</strong> 在没有git commit前，使用 git checkout -- Readme 可以恢复删除的文件（Readme）</p>
+<p><strong>5、强制使用master覆盖本地代码</strong></p>
+<p>$ git fetch --all
+　　　　　　　　$ git reset --hard origin/master
+　　　　　　　　$ git pull</p>
+<h3>1.4 使用git操作GitHub</h3>
+<p><strong>1、登录</strong><a href="https://github.com/"><strong>https://github.com</strong></a> <strong>创建一个github项</strong></p>
+<p>​                <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180104151351253-1830962882.png"></p>
+<p><strong>2、选择创建一个新项目，还是将本地的项目推到github这个项目里</strong></p>
+<p>​                <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180104151525456-849656002.png"></p>
+<p><strong>3、将本地已有的项目上传到GitHub中</strong></p>
+<p>1）这里我们选择使用HTTPS的方法，讲本地已有项目提交到GitHub中
+　　　　2）在本地Git对应的项目下执行这条命令，配置，将以后的内容提交到这个路径下即：GitHub对应的项目中</p>
+<p>git remote add origin https://github.com/Tom7481079/s15_proj.git                    #设置代码提交url路径
+　　　　　　git remote rm origin                                                                                             # 删除设置的代码提交url路径</p>
+<p>3）将本地的项目推到GitHub中（需要输入GitHub网站的用户名和密码）
+　　　　　　git push -u origin master                                                                                     # 将本地代码push到GitHub中</p>
+<p>4）然后刷新页面即可在网页中看到我们本地的项目上传成功了</p>
+<p><strong>4、GitHub中文件与本地项目不一致时上传到GitHub报错解决方法</strong></p>
+<p><strong>方法一：</strong>使用强制push的方法，这样会使远程修改丢失，一般是不可取的，尤其是多人协作开发的时候。</p>
+<p>git push -u origin master -f</p>
+<p><strong>方法二：</strong>push前先将远程repository修改pull下来</p>
+<p>git pull origin master                                 # 先将GitHub中的文件下载到本地
+　　　　　　　　git push -u origin master                           # 然后在push到GitHub中</p>
+<p>注：执行git pull是如果只有GitHub中修改，会自动合并，如果本地也有修改必须手动合并才能正常git push</p>
+<p><strong>方法三：</strong>若不想merge远程和本地修改，可以先创建新的分支：</p>
+<p>git branch [name]                                      # 新建一个分支
+　　　　　　　　git push -u origin [name]                           # 提交到分支中</p>
+<h3>1.5 配置win10当前用户对GitHub所有项目有权限（git push不必输入密码）</h3>
+<p><strong>1、使用命令生成公钥和私钥（在git命令行中执行）</strong></p>
+<p>ssh-keygen.exe               #生成一对公钥和私钥
+　　　　　　C:\Users\tom.ssh           #这里是生成的秘钥地址</p>
+<p><strong>2、将公钥上传到GitHub中</strong></p>
+<p><strong>1. 第一步</strong></p>
+<p>​                     <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105073615081-1871724160.png"></p>
+<p><strong>2. 第二步</strong></p>
+<p>​                   <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105073654846-1462734098.png"></p>
+<p><strong>3. 第三步</strong></p>
+<p>​                     <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105073735253-1243925685.png"></p>
+<p><strong>4. 第四步</strong></p>
+<p>​                  <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105073827659-1537210954.png"></p>
+<p><strong>3. 更改本地push方式为ssh</strong></p>
+<p><strong>1. 配置完公钥后还需要将GitHub项目的push方式改成ssh</strong></p>
+<p>​                    <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105074015112-1379203406.png"></p>
+<p><strong>2. 更改本地push方式为ssh</strong></p>
+<p>1） vim .git/config
+　　　　　　2） 将已有的https的路径替换成ssh模式，即上面复制的地址
+　　　　　　　　#url = https://github.com/Tom7481079/s15_proj.git
+　　　　　　　　url = git@github.com:Tom7481079/s15_proj.git</p>
+<p><strong>3、此时再执行品push命令时就不会再让输入用户名和密码了</strong></p>
+<p>git push origin master</p>
+<h3>1.6 配置Linux当前用户对GitHub指定项目有权限（git push不必输入密码）</h3>
+<p><strong>1、在centos系统中创建密钥对</strong></p>
+<p>ssh-keygen                               #给当前用户创建公钥私钥
+　　　　　　vim ~/.ssh/id_rsa.pub               #将当前用户公钥放到GitHub对应项目中</p>
+<p><strong>2、将生成的公钥放到GitHub指定项目中</strong></p>
+<p><strong>1、打开指定项目的settings配置</strong></p>
+<p>​                     <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105075201440-995722828.png"></p>
+<p><strong>2、选中这个</strong></p>
+<p>​                    <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105075240893-731557787.png"></p>
+<p><strong>3、点击： “Add deploy key” 并粘贴密钥</strong></p>
+<p>​                     <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105075344128-1346438223.png"></p>
+<h3>1.7 git分支管理（创建&amp;合并分支）</h3>
+<p><strong>1、分支管理的作用</strong></p>
+<p>1、假设你准备开发一个新功能，但是需要两周才能完成，第一周你写了50%的代码，如果立刻提交，由于代码
+　　　　　　     还没写完，不完整的代码库会导致别人不能干活了
+　　　　　　2、如果等代码全部写完再一次提交，又存在丢失每天进度的巨大风险。
+　　　　　　3、现在有了分支，你创建了一个属于你自己的分支，别人看不到，还继续在原来的分支上正常工作
+　　　　　　4、而你在自己的分支上干活，想提交就提交，直到开发完毕后，再一次性合并到原来的分支上，这样，既安全，
+　　　　　　      又不影响别人工作
+　　　　　　5、 其他版本控制系统如SVN等都有分支管理，但是用过之后你会发现，这些版本控制系统创建和切换分支比蜗
+　　　　　　     牛还慢，简直让人无法忍受，结果分支功能成了摆设，大家都不去用
+　　　　　　6、 但Git的分支是与众不同的，无论创建、切换和删除分支，Git在1秒钟之内就能完成！无论你的版本库是1
+　　　　　　     个文件还是1万个文件</p>
+<p><strong>2、分支管理-----创建分支</strong></p>
+<p>git branch                              #查看现有分支
+　　　　　　git checkout -b dev               #创建并切换到分支dev， -b参数指切换dev分支
+　　　　　　git checkout master              #从dev分支切换到master
+　　　　　　git branch -D bug-101           #删除本地分支bug-101</p>
+<p><strong>此时对项目进行修改</strong>
+　　　　　　git add .                                              #提交到舞台区
+　　　　　　git commit -m "update readme"         #提交到仓库
+　　　　　　git push origin dev                             #将跟新内容提交到分支dev中而不是master中</p>
+<p><strong>3、如何将分支dev中的代码合并到主分支master中</strong></p>
+<p>git checkout master                           #从dev分支切换到master
+　　　　　　git pull                                                #将master上的项目下载到本地
+　　　　　　git merge dev                                     #在master上执行这条命令，试图合并master和dev（报错，master更新了）</p>
+<p>vim Readme                                      #将不一致的地方手动合并
+　　　　　　git add .
+　　　　　　git push origin master                        #手动合并后就可以将dev分支上修改的东西上传到GitHub的master中了</p>
+<p>git log –graph                                     #查看从什么地方出现的分支</p>
+<p><strong>4、分支取名规范</strong></p>
+<p>1、<strong>方法1：</strong> 使用人名作为分支名（传统开发每个人负责一个功能模块）
+　　　　　　2、<strong>方法2：</strong> 根据功能模块设置分支名（<strong>如：</strong> feature-100 hotfix-99） </p>
+<p>​      <strong>5、<strong><em>*全局</em>*dev</strong>分支（相当于上生产环境前的测试分支）</strong></p>
+<p>1、master是不能再上面开发的（master必须是一个稳定版本）
+　　　　　　2、所以会有一个全局dev分支，这样就有三种，master,dev,和每个人自己的分支
+　　　　　　3、只有在全局dev中没问题后才会真正pull到master中</p>
+<h3>1.8 git stash (bug分支)</h3>
+<p><strong>1、</strong>git stash使用场景</p>
+<p>1、当正在其它分支写代码时突然有一个在master上发现一个bug需要立刻修改
+　　　　　　2、这时当然你可以将正在修改的内容先提交到自己的分支中再切换到bug分支，但比较麻烦
+　　　　　　3、这里就可以执行git stash 命令可以将现在这个状态临时保存起来</p>
+<p><strong>2、git stash使用</strong></p>
+<p><strong>1</strong>、在dev工作区正在写东西，突然有个<strong>bug</strong>需要立刻修改</p>
+<p>vim Readme              #突然出现了一个bug
+　　　　　　　　git stash                     #将dev中未保存的文件放到一个临时区（以免带到了bug分支中）</p>
+<p><strong>2</strong>、切换到<strong>bug-100</strong>分支，修复<strong>bug</strong>，并提交到本地仓库**</p>
+<p>git checkout -b bug-100                   #创建并切换到bug-100分支
+　　　　　　　　vim Readme                                    #在bug-100分支中修复bug
+　　　　　　　　git add .                                            #将修改内容保存到bug-100分支的舞台区
+　　　　　　　　git commit -m 'commit-100-bug'      #提交到仓库</p>
+<p><strong>3</strong>、切换到<strong>master</strong>合并<strong>bug-100</strong>并提交到<strong>GitHub</strong></p>
+<p>git checkout master             #切换到master
+　　　　　　　　git merge bug-100               #合并master和bug-100分支
+　　　　　　　　git push origin master          #将修改后的内容推送到GitHub上（即可更新master）</p>
+<p><strong>4</strong>、再次切换到<strong>dev</strong>分支，恢复以前的状态</p>
+<p>git checkout dev                 #再次切换到dev分支
+　　　　　　　　git status                            #dev分支的工作区没有东西
+　　　　　　　　more Readme                    #发现以前在dev工作区正在修改未提交到本地仓库的东西没有了
+　　　　　　　　git stash list                       #查看使用git stash 临时保存的文件
+　　　　　　　　git stash apply                   #恢复上次使用git stash 临时保存的文件
+　　　　　　　　git status                            #可以看到又回到了，切换到bug-100分支前的修改状态了</p>
+<p><strong>5</strong>、<strong>git stash</strong>的其他操作</p>
+<p>git stash drop                        #删除最久的那个使用git stash 保存的临时状态
+　　　　　　　　git stash apply stash@{0}     #指定恢复到那个临时状态
+　　　　　　　　git stash pop                         #恢复并删除上一个临时状态</p>
+<p><strong>注1：</strong>git stash apply恢复，恢复后，stash内容并不删除，你需要使用命令git stash drop来删除
+　　　　　　　　<strong>注2：</strong>另一种方式是使用git stash pop,恢复的同时把stash内容也删除了。</p>
+<h3>1.9 多人协作开发</h3>
+<p><strong>1、第一步：</strong>在win10中clone GitHub中的项目并创建dev分支</p>
+<div class="highlight"><pre><span></span><span class="n">cd</span> <span class="n">c</span><span class="p">:</span><span class="o">/</span>
+<span class="n">mkdir</span> <span class="n">win10_pro</span>
+<span class="n">cd</span> <span class="n">win10_pro</span><span class="o">/</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Tom7481079</span><span class="o">/</span><span class="n">test_github</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">test_github</span><span class="o">/</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">dev</span>              <span class="c1"># 此时到Linux中操作</span>
+</pre></div>
+
+
+<p><strong>2、第二步：</strong>在Linux中也clone GitHub中的项目，创建dev分支，修改后提交到GitHub master中</p>
+<div class="highlight"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">linux_pro</span>
+<span class="n">cd</span> <span class="n">linux_pro</span><span class="o">/</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="o">.</span><span class="n">com</span><span class="o">/</span><span class="n">Tom7481079</span><span class="o">/</span><span class="n">test_github</span><span class="o">.</span><span class="n">git</span>
+<span class="n">cd</span> <span class="n">test_github</span><span class="o">/</span>
+<span class="n">git</span> <span class="n">checkout</span> <span class="o">-</span><span class="n">b</span> <span class="n">dev</span>
+
+<span class="n">vim</span> <span class="n">readme</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;modify_linux_01&#39;</span>
+
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>       <span class="c1">#从dev分支切换到master</span>
+<span class="n">git</span> <span class="n">pull</span>                  <span class="c1">#将master上的项目下载到本地</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">dev</span>             <span class="c1">#合并master和dev（GitHub中master未更新，可以成功合并）</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>    <span class="c1">#成功push到GitHub中</span>
+</pre></div>
+
+
+<p><strong>3、第三步：</strong>win10中在别人已经提交代码后自己提交，解决合并冲突</p>
+<div class="highlight"><pre><span></span><span class="n">vim</span> <span class="n">readme</span>
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">m</span> <span class="s1">&#39;modify_win10_01&#39;</span>
+
+<span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span>       <span class="c1">#从dev分支切换到master</span>
+<span class="n">git</span> <span class="n">pull</span>                  <span class="c1">#将master上的项目下载到本地（成功但有冲突）</span>
+<span class="n">git</span> <span class="n">merge</span> <span class="n">dev</span>             <span class="c1">#合并master和dev（GitHub中master已经更新，自动合并失败）</span>
+<span class="n">git</span> <span class="n">status</span>                <span class="c1"># 查看有哪些哪些文件不同导致的合并冲突</span>
+<span class="n">git</span> <span class="n">diff</span> <span class="n">readme</span>           <span class="c1"># 查看readme具体有哪些不同</span>
+<span class="n">vim</span> <span class="n">readme</span>                <span class="c1"># 手动合并</span>
+
+<span class="n">git</span> <span class="n">add</span> <span class="o">.</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="s2">&quot;win10_solved_conflict&quot;</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>    <span class="c1">#成功push到GitHub中</span>
+
+<span class="c1"># 上面git commit也失败了，git认为你有部分代码没有做好提交的准备</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">-</span><span class="n">a</span>             <span class="c1"># 提交全部</span>
+<span class="n">git</span> <span class="n">commit</span> <span class="o">/</span><span class="n">c</span><span class="o">/</span><span class="n">win10_pro</span><span class="o">/</span><span class="n">test_github</span><span class="o">/</span><span class="n">readme</span> <span class="o">-</span><span class="n">i</span> <span class="o">-</span><span class="n">m</span> <span class="s2">&quot;merge&quot;</span>
+</pre></div>
+
+
+<h3>1.10 vim .gitignore (指定那些文件不需要git管理)</h3>
+<p><strong>1、说明</strong></p>
+<p>1） 注： 如果某个文件，目录已经被上传到GitHub中了，再添加到.gitignore文件中是没有作用的。
+　　　　2） 比如core/test1.py以前没有将/core写到.gitignore文件中，但是后来添加了
+　　　　3） 那么之后对core/test1.py修改依然会改变，但是如果添加core/test2.py是不会出现在GitHub中的
+　　　　4） GitHub中有各个语言忽略文件模板网址：https://github.com/github/gitignore</p>
+<p><strong>2、python中指定忽略的文件</strong></p>
+<div class="highlight"><pre><span></span><span class="c1"># Byte-compiled / optimized / DLL files</span>
+<span class="n">__pycache__</span><span class="o">/</span>
+<span class="o">*.</span><span class="n">py</span><span class="p">[</span><span class="n">cod</span><span class="p">]</span>
+<span class="o">*</span><span class="err">$</span><span class="n">py</span><span class="o">.</span><span class="k">class</span>
+
+<span class="err"># </span><span class="nc">C</span> <span class="n">extensions</span>
+<span class="o">*.</span><span class="n">so</span>
+
+<span class="c1"># Distribution / packaging</span>
+<span class="o">.</span><span class="n">Python</span>
+<span class="n">build</span><span class="o">/</span>
+<span class="n">develop</span><span class="o">-</span><span class="n">eggs</span><span class="o">/</span>
+<span class="n">dist</span><span class="o">/</span>
+<span class="n">downloads</span><span class="o">/</span>
+<span class="n">eggs</span><span class="o">/</span>
+<span class="o">.</span><span class="n">eggs</span><span class="o">/</span>
+<span class="n">lib</span><span class="o">/</span>
+<span class="n">lib64</span><span class="o">/</span>
+<span class="n">parts</span><span class="o">/</span>
+<span class="n">sdist</span><span class="o">/</span>
+<span class="n">var</span><span class="o">/</span>
+<span class="n">wheels</span><span class="o">/</span>
+<span class="o">*.</span><span class="n">egg</span><span class="o">-</span><span class="n">info</span><span class="o">/</span>
+<span class="o">.</span><span class="n">installed</span><span class="o">.</span><span class="n">cfg</span>
+<span class="o">*.</span><span class="n">egg</span>
+<span class="n">MANIFEST</span>
+<span class="c1"># PyInstaller</span>
+<span class="c1">#  Usually these files are written by a python script from a template</span>
+<span class="c1">#  before PyInstaller builds the exe, so as to inject date/other infos into it.</span>
+<span class="o">*.</span><span class="n">manifest</span>
+<span class="o">*.</span><span class="n">spec</span>
+
+<span class="c1"># Installer logs</span>
+<span class="n">pip</span><span class="o">-</span><span class="n">log</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">pip</span><span class="o">-</span><span class="n">delete</span><span class="o">-</span><span class="n">this</span><span class="o">-</span><span class="n">directory</span><span class="o">.</span><span class="n">txt</span>
+
+<span class="c1"># Unit test / coverage reports</span>
+<span class="n">htmlcov</span><span class="o">/</span>
+<span class="o">.</span><span class="n">tox</span><span class="o">/</span>
+<span class="o">.</span><span class="n">coverage</span>
+<span class="o">.</span><span class="n">coverage</span><span class="o">.*</span>
+<span class="o">.</span><span class="n">cache</span>
+<span class="n">nosetests</span><span class="o">.</span><span class="n">xml</span>
+<span class="n">coverage</span><span class="o">.</span><span class="n">xml</span>
+<span class="o">*.</span><span class="n">cover</span>
+<span class="o">.</span><span class="n">hypothesis</span><span class="o">/</span>
+
+<span class="c1"># Translations</span>
+<span class="o">*.</span><span class="n">mo</span>
+<span class="o">*.</span><span class="n">pot</span>
+
+<span class="c1"># Django stuff:</span>
+<span class="o">*.</span><span class="n">log</span>
+<span class="o">.</span><span class="n">static_storage</span><span class="o">/</span>
+<span class="o">.</span><span class="n">media</span><span class="o">/</span>
+<span class="n">local_settings</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Flask stuff:</span>
+<span class="n">instance</span><span class="o">/</span>
+<span class="o">.</span><span class="n">webassets</span><span class="o">-</span><span class="n">cache</span>
+
+<span class="c1"># Scrapy stuff:</span>
+<span class="o">.</span><span class="n">scrapy</span>
+
+<span class="c1"># Sphinx documentation</span>
+<span class="n">docs</span><span class="o">/</span><span class="n">_build</span><span class="o">/</span>
+
+<span class="c1"># PyBuilder</span>
+<span class="n">target</span><span class="o">/</span>
+
+<span class="c1"># Jupyter Notebook</span>
+<span class="o">.</span><span class="n">ipynb_checkpoints</span>
+
+<span class="c1"># pyenv</span>
+<span class="o">.</span><span class="n">python</span><span class="o">-</span><span class="n">version</span>
+
+<span class="c1"># celery beat schedule file</span>
+<span class="n">celerybeat</span><span class="o">-</span><span class="n">schedule</span>
+
+<span class="c1"># SageMath parsed files</span>
+<span class="o">*.</span><span class="n">sage</span><span class="o">.</span><span class="n">py</span>
+
+<span class="c1"># Environments</span>
+<span class="o">.</span><span class="n">env</span>
+<span class="o">.</span><span class="n">venv</span>
+<span class="n">env</span><span class="o">/</span>
+<span class="n">venv</span><span class="o">/</span>
+<span class="n">ENV</span><span class="o">/</span>
+<span class="n">env</span><span class="o">.</span><span class="n">bak</span><span class="o">/</span>
+<span class="n">venv</span><span class="o">.</span><span class="n">bak</span><span class="o">/</span>
+
+<span class="c1"># Spyder project settings</span>
+<span class="o">.</span><span class="n">spyderproject</span>
+<span class="o">.</span><span class="n">spyproject</span>
+
+<span class="c1"># Rope project settings</span>
+<span class="o">.</span><span class="n">ropeproject</span>
+
+<span class="c1"># mkdocs documentation</span>
+<span class="o">/</span><span class="n">site</span>
+
+<span class="c1"># mypy</span>
+<span class="o">.</span><span class="n">mypy_cache</span><span class="o">/</span>
+</pre></div>
+
+
+<h3>1.11 Git基本常用命令</h3>
+<div class="highlight"><pre><span></span>   <span class="n">mkdir</span><span class="err">：</span>         <span class="n">XX</span> <span class="p">(</span><span class="err">创建一个空目录</span> <span class="n">XX指目录名</span><span class="p">)</span>
+
+   <span class="n">pwd</span><span class="err">：</span>          <span class="err">显示当前目录的路径。</span>
+
+   <span class="n">git</span> <span class="n">init</span>          <span class="err">把当前的目录变成可以管理的</span><span class="n">git仓库</span><span class="err">，生成隐藏</span><span class="p">.</span><span class="n">git文件</span><span class="err">。</span>
+
+   <span class="n">git</span> <span class="k">add</span> <span class="n">XX</span>       <span class="err">把</span><span class="n">xx文件添加到暂存区去</span><span class="err">。</span>
+
+   <span class="n">git</span> <span class="k">commit</span> <span class="err">–</span><span class="n">m</span> <span class="err">“</span><span class="n">XX</span><span class="err">”</span>  <span class="err">提交文件</span> <span class="err">–</span><span class="n">m</span> <span class="err">后面的是注释。</span>
+
+   <span class="n">git</span> <span class="n">status</span>        <span class="err">查看仓库状态</span>
+
+   <span class="n">git</span> <span class="n">diff</span>  <span class="n">XX</span>      <span class="err">查看</span><span class="n">XX文件修改了那些内容</span>
+
+   <span class="n">git</span> <span class="n">log</span>          <span class="err">查看历史记录</span>
+
+   <span class="n">git</span> <span class="k">reset</span>  <span class="c1">--hard HEAD^ 或者 git reset  --hard HEAD~ 回退到上一个版本</span>
+
+                        <span class="p">(</span><span class="err">如果想回退到</span><span class="mi">100</span><span class="err">个版本，使用</span><span class="n">git</span> <span class="k">reset</span> <span class="err">–</span><span class="n">hard</span> <span class="n">HEAD</span><span class="o">~</span><span class="mi">100</span> <span class="p">)</span>
+
+   <span class="n">cat</span> <span class="n">XX</span>         <span class="err">查看</span><span class="n">XX文件内容</span>
+
+   <span class="n">git</span> <span class="n">reflog</span>       <span class="err">查看历史记录的版本号</span><span class="n">id</span>
+
+   <span class="n">git</span> <span class="n">checkout</span> <span class="c1">-- XX  把XX文件在工作区的修改全部撤销。</span>
+
+   <span class="n">git</span> <span class="n">rm</span> <span class="n">XX</span>          <span class="err">删除</span><span class="n">XX文件</span>
+
+   <span class="n">git</span> <span class="n">remote</span> <span class="k">add</span> <span class="n">origin</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">tugenhua0707</span><span class="o">/</span><span class="n">testgit</span> <span class="err">关联一个远程库</span>
+
+   <span class="n">git</span> <span class="n">push</span> <span class="err">–</span><span class="n">u</span><span class="p">(</span><span class="err">第一次要用</span><span class="o">-</span><span class="n">u</span> <span class="err">以后不需要</span><span class="p">)</span> <span class="n">origin</span> <span class="n">master</span> <span class="err">把当前</span><span class="n">master分支推送到远程库</span>
+
+   <span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">tugenhua0707</span><span class="o">/</span><span class="n">testgit</span>  <span class="err">从远程库中克隆</span>
+
+   <span class="n">git</span> <span class="n">checkout</span> <span class="err">–</span><span class="n">b</span> <span class="n">dev</span>  <span class="err">创建</span><span class="n">dev分支</span> <span class="err">并切换到</span><span class="n">dev分支上</span>
+
+   <span class="n">git</span> <span class="n">branch</span>  <span class="err">查看当前所有的分支</span>
+
+   <span class="n">git</span> <span class="n">checkout</span> <span class="n">master</span> <span class="err">切换回</span><span class="n">master分支</span>
+
+   <span class="n">git</span> <span class="n">merge</span> <span class="n">dev</span>    <span class="err">在当前的分支上合并</span><span class="n">dev分支</span>
+
+   <span class="n">git</span> <span class="n">branch</span> <span class="err">–</span><span class="n">d</span> <span class="n">dev</span> <span class="err">删除</span><span class="n">dev分支</span>
+
+   <span class="n">git</span> <span class="n">branch</span> <span class="n">name</span>  <span class="err">创建分支</span>
+
+   <span class="n">git</span> <span class="n">stash</span> <span class="err">把当前的工作隐藏起来</span> <span class="err">等以后恢复现场后继续工作</span>
+
+   <span class="n">git</span> <span class="n">stash</span> <span class="n">list</span> <span class="err">查看所有被隐藏的文件列表</span>
+
+   <span class="n">git</span> <span class="n">stash</span> <span class="n">apply</span> <span class="err">恢复被隐藏的文件，但是内容不删除</span>
+
+   <span class="n">git</span> <span class="n">stash</span> <span class="k">drop</span> <span class="err">删除文件</span>
+
+   <span class="n">git</span> <span class="n">stash</span> <span class="n">pop</span> <span class="err">恢复文件的同时</span> <span class="err">也删除文件</span>
+
+   <span class="n">git</span> <span class="n">remote</span> <span class="err">查看远程库的信息</span>
+
+   <span class="n">git</span> <span class="n">remote</span> <span class="err">–</span><span class="n">v</span> <span class="err">查看远程库的详细信息</span>
+
+   <span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">master</span>  <span class="n">Git会把master分支推送到远程库对应的远程分支上</span>
+</pre></div>
+
+
+<h3>1.12 删除GitHub中创建的项目</h3>
+<p><strong>1．打开要删除的项目</strong></p>
+<p>​          <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105184737971-2036569767.png"></p>
+<p><strong>2．点击对应项目的settings</strong></p>
+<p>​          <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105184816159-2053021273.png"></p>
+<p><strong>3. 点击右侧菜单的option(默认就是)，拉取到最后点击删除按钮</strong></p>
+<p>​          <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105184853331-2145428014.png"></p>
+<p><strong>4．为了安全执行时会弹窗这个提示框</strong></p>
+<p>​          <img alt="img" src="https://images2017.cnblogs.com/blog/1080958/201801/1080958-20180105185012003-603915066.png"></p>
+<h3>目录：GIT其他篇：</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i1">1.1 常见版本管理工具介绍 及 版本工具作用</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i2">1.2 git、GitHub和SVN比较</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i3">1.3 本地git基本使用命令</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i4">1.4 使用git操作GitHub</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i5">1.5 配置win10当前用户对GitHub所有项目有权限（git push不必输入密码）</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i6">1.6 配置Linux当前用户对GitHub指定项目有权限（git push不必输入密码）</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i7">1.7 git分支管理（创建&amp;合并分支）</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i8">1.8 git stash (bug分支)</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i9">1.9 多人协作开发</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i10">1.10 vim .gitignore (指定那些文件不需要git管理)</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i11">1.11 Git基本常用命令</a></li>
+<li><a href="https://www.cnblogs.com/xiaonq/p/8192008.html#i12">1.12 删除GitHub中创建的项目</a></li>
+</ul></div>
 	</div>
 		<footer>
 		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>

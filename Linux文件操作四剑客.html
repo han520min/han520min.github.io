@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li class="active"><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>Linux文件操作四剑客</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/Linux文件操作四剑客.html">2019-08-08 10:20:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/linux.html">Linux</a>
+tags: <a href="/tag/linux.html">Linux</a> </div>
+		<div><h3>1.1 find查找命令</h3>
+<p><strong>1、find命令说明</strong></p>
+<p>1. Linux find命令用来在指定目录下查找文件。</p>
+<p>2. 任何位于参数之前的字符串都将被视为欲查找的目录名。</p>
+<p>3. 如果使用该命令时，不设置任何参数，则find命令将在当前目录下查找子目录与文件。</p>
+<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">name</span>            <span class="o">#</span> <span class="err">按文件名查找</span>
+<span class="o">-</span><span class="k">size</span>            <span class="o">#</span> <span class="err">按文件大小查找</span>
+<span class="o">-</span><span class="n">perm</span>            <span class="o">#</span> <span class="err">按权限查找</span>
+<span class="o">-</span><span class="n">mtime</span> <span class="n">n</span>         <span class="o">#</span> <span class="err">查找</span><span class="n">n天内修改内容的文件</span>
+<span class="o">-</span><span class="n">mmin</span> <span class="n">n</span>          <span class="o">#</span> <span class="err">查找</span><span class="n">n分钟内修改内容的文件</span>
+</pre></div>
+
+
+<p><strong>2、find常用查找方法</strong></p>
+<p><strong>find . -size +9M | xargs ls -lh</strong> : <strong>查找当前目录下大于9M的文件详细信息</strong></p>
+<div class="highlight"><pre><span></span><span class="err">复制代码</span>
+<span class="c1"># 查找当前目录下大于9M的文件详细信息</span>
+<span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># find . -size +9M | xargs ls -lh</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span>  <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">24</span><span class="n">M</span> <span class="n">Jul</span>  <span class="mi">7</span> <span class="mo">04</span><span class="p">:</span><span class="mi">18</span> <span class="o">./</span><span class="n">aaa</span><span class="o">/</span><span class="n">Python</span><span class="o">-</span><span class="mf">3.7</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">libpython3</span><span class="o">.</span><span class="mi">7</span><span class="n">m</span><span class="o">.</span><span class="n">a</span>
+<span class="o">-</span><span class="n">rwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">14</span><span class="n">M</span> <span class="n">Jul</span>  <span class="mi">7</span> <span class="mo">04</span><span class="p">:</span><span class="mi">19</span> <span class="o">./</span><span class="n">aaa</span><span class="o">/</span><span class="n">Python</span><span class="o">-</span><span class="mf">3.7</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">Programs</span><span class="o">/</span><span class="n">_testembed</span>
+<span class="o">-</span><span class="n">rwxr</span><span class="o">-</span><span class="n">xr</span><span class="o">-</span><span class="n">x</span>  <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">14</span><span class="n">M</span> <span class="n">Jul</span>  <span class="mi">7</span> <span class="mo">04</span><span class="p">:</span><span class="mi">18</span> <span class="o">./</span><span class="n">aaa</span><span class="o">/</span><span class="n">Python</span><span class="o">-</span><span class="mf">3.7</span><span class="o">.</span><span class="mi">0</span><span class="o">/</span><span class="n">python</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-</span><span class="n">r</span><span class="o">--</span><span class="n">r</span><span class="o">--</span>  <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">22</span><span class="n">M</span> <span class="n">Jul</span>  <span class="mi">6</span> <span class="mi">23</span><span class="p">:</span><span class="mi">53</span> <span class="o">./</span><span class="n">aaa</span><span class="o">/</span><span class="n">Python</span><span class="o">-</span><span class="mf">3.7</span><span class="o">.</span><span class="mf">0.</span><span class="n">tgz</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">47</span><span class="n">M</span> <span class="n">Jan</span>  <span class="mi">7</span>  <span class="mi">2019</span> <span class="o">./</span><span class="n">boot</span><span class="o">/</span><span class="n">initramfs</span><span class="o">-</span><span class="mi">0</span><span class="o">-</span><span class="n">rescue</span><span class="o">-</span><span class="mi">8</span><span class="n">b956f09fe0549c4b6182589acceab30</span><span class="o">.</span><span class="n">img</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">21</span><span class="n">M</span> <span class="n">Jan</span>  <span class="mi">7</span>  <span class="mi">2019</span> <span class="o">./</span><span class="n">boot</span><span class="o">/</span><span class="n">initramfs</span><span class="o">-</span><span class="mf">3.10</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mf">514.</span><span class="n">el7</span><span class="o">.</span><span class="n">x86_64</span><span class="o">.</span><span class="n">img</span>
+<span class="o">-</span><span class="n">rw</span><span class="o">-------.</span> <span class="mi">1</span> <span class="n">root</span> <span class="n">root</span>  <span class="mi">14</span><span class="n">M</span> <span class="n">Jan</span>  <span class="mi">7</span>  <span class="mi">2019</span> <span class="o">./</span><span class="n">boot</span><span class="o">/</span><span class="n">initramfs</span><span class="o">-</span><span class="mf">3.10</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="mf">514.</span><span class="n">el7</span><span class="o">.</span><span class="n">x86_64kdump</span><span class="o">.</span><span class="n">img</span>
+</pre></div>
+
+
+<p><strong>find . -type f -name "*.log" -size +1M -exec cp -av {} /tmp \;</strong> ：<strong>查找当前目录下以 .log 结尾且大于5M的文件，并复制到/tmp目录下</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># find . -type f -name &quot;*.log&quot; -size +1M -exec cp -av {} /tmp \;</span>
+<span class="n">cp</span><span class="p">:</span> <span class="err">‘</span><span class="o">./</span><span class="n">tmp</span><span class="o">/</span><span class="n">audit</span><span class="o">.</span><span class="n">log</span><span class="err">’</span> <span class="ow">and</span> <span class="err">‘</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">audit</span><span class="o">.</span><span class="n">log</span><span class="err">’</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">file</span>
+<span class="n">cp</span><span class="p">:</span> <span class="err">‘</span><span class="o">./</span><span class="n">tmp</span><span class="o">/</span><span class="n">journal</span><span class="o">.</span><span class="n">log</span><span class="err">’</span> <span class="ow">and</span> <span class="err">‘</span><span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="n">journal</span><span class="o">.</span><span class="n">log</span><span class="err">’</span> <span class="n">are</span> <span class="n">the</span> <span class="n">same</span> <span class="nb">file</span>
+</pre></div>
+
+
+<p><strong>find /var -mtime +3 -mtime -5</strong> ：<strong>在/var下查找更改时间在三天到五天的文件</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># find /var -mtime +3 -mtime -5</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">tmp</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">yumdb</span><span class="o">/</span><span class="n">l</span>
+<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">yum</span><span class="o">/</span><span class="n">yumdb</span><span class="o">/</span><span class="n">l</span><span class="o">/</span><span class="n">f20daac8f6b3893e42be72af22a5118848f</span>
+</pre></div>
+
+
+<p><strong>find . -mmin +1 -mmin -3</strong> ：<strong>查找当前文件夹下1分钟前3分钟内修改的文件</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># find . -mmin +1 -mmin -3</span>
+<span class="o">./</span><span class="n">aa</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+
+
+<h3>1.2 grep指令</h3>
+<p><strong>1、grep指令说明</strong>　　　　　</p>
+<p>1. grep命令是一种强大的文本搜索工具，它能使用正则表达式搜索文本，并把匹 配的行打印出来</p>
+<p>2. grep搜索成功，则返回0，如果搜索不成功，则返回1，如果搜索的文件不存在，则返回2。</p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="o">^</span><span class="n">linux</span><span class="w">         </span><span class="err">#</span><span class="w"> </span><span class="n">以linux开头的行</span><span class="w"></span>
+<span class="err">$</span><span class="n">php</span><span class="w">           </span><span class="err">#</span><span class="w"> </span><span class="n">以php结尾的行</span><span class="w"></span>
+<span class="p">.</span><span class="w">              </span><span class="err">#</span><span class="w"> </span><span class="n">匹配任意单字符</span><span class="w"></span>
+<span class="p">.</span><span class="o">+</span><span class="w">             </span><span class="err">#</span><span class="w"> </span><span class="n">匹配任意多个字符</span><span class="w"></span>
+<span class="p">.</span><span class="o">*</span><span class="w">             </span><span class="err">#</span><span class="w"> </span><span class="n">匹配0个或多个字符</span><span class="p">(</span><span class="n">可有可无</span><span class="p">)</span><span class="w"></span>
+<span class="o">[</span><span class="n">0-9a-z</span><span class="o">]</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="n">匹配中括号内任意一个字符</span><span class="w"></span>
+<span class="o">[</span><span class="n">abc</span><span class="o">]</span><span class="w">          </span><span class="err">#</span><span class="w"> </span><span class="n">表示匹配一个字符</span><span class="err">，</span><span class="n">这个字符必须是abc中的一个</span><span class="err">。</span><span class="w"></span>
+<span class="p">(</span><span class="n">linux</span><span class="p">)</span><span class="o">+</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="n">出现多次Linux单词</span><span class="w"></span>
+<span class="p">(</span><span class="n">web</span><span class="p">)</span><span class="err">{</span><span class="mi">2</span><span class="err">}</span><span class="w">       </span><span class="err">#</span><span class="w"> </span><span class="n">web出现两次以上</span><span class="w"></span>
+<span class="err">\</span><span class="w">              </span><span class="err">#</span><span class="w"> </span><span class="n">屏蔽转义</span><span class="w">  </span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<p><strong>2、grep常用查找方法</strong></p>
+<p><strong>grep -n 'root' /etc/passwd</strong> ：<strong>查找/etc/passwd下包含 root字符串的文件</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># grep -n &#39;root&#39; /etc/passwd</span>
+<span class="mi">1</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="mi">10</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</pre></div>
+
+
+<p><strong>grep -Ev "root|nologin" /etc/passwd</strong> ：<strong>查找不包含root和nologin关键字的行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># grep -Ev &quot;root|nologin&quot; /etc/passwd</span>
+<span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+<span class="n">shutdown</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">shutdown</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">shutdown</span>
+<span class="n">halt</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">halt</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">halt</span>
+</pre></div>
+
+
+<p><strong>grep "root" /etc/{passwd,shadow}</strong>：<strong>查找/etc/passwd和/etc/shadow文件中包含root关键字的行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># grep &quot;root&quot; /etc/{passwd,shadow}</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">passwd</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</pre></div>
+
+
+<p><strong>grep -c root /etc/passwd</strong> ：<strong>统计/etc/passwd文件中包含root字符串行的数量</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="o">/</span><span class="p">]</span><span class="c1"># grep -c root /etc/passwd</span>
+</pre></div>
+
+
+<h3>1.3 sed指令</h3>
+<p><strong>1、sed指令说明</strong></p>
+<p>1. sed是一款高效的流编辑器，它一次只处理一行内容</p>
+<p>2. 处理时把当前行存储在临时缓存区，接着用sed指令处理缓存区的内容，处理完成后把缓存区内容送到屏幕，接着处理下一行</p>
+<div class="highlight"><pre><span></span><span class="o">-</span><span class="n">n</span>         <span class="o">#</span> <span class="err">只列出</span><span class="n">sed处理的哪一行内容</span>
+<span class="o">-</span><span class="n">e</span>         <span class="o">#</span> <span class="err">直接在</span><span class="n">sed模式上进行sed动作编辑</span>
+<span class="o">-</span><span class="n">f</span>         <span class="o">#</span> <span class="err">直接将</span><span class="n">sed动作写在一个文件内</span>
+<span class="o">-</span><span class="n">r</span>         <span class="o">#</span> <span class="err">让</span><span class="n">sed指令支持扩展的正则表达式</span>
+</pre></div>
+
+
+<p><strong>2、sed常用方法</strong></p>
+<p><strong>nl /etc/passwd | sed '2,5d'</strong> ：<strong>将2~5行内容删除，然后打印到屏幕上</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># nl /etc/passwd | sed &#39;2,5d&#39;</span>
+     <span class="mi">1</span>  <span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+     <span class="mi">6</span>  <span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+     <span class="mi">7</span>  <span class="n">shutdown</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">shutdown</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">shutdown</span>
+     <span class="mi">8</span>  <span class="n">halt</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">halt</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">halt</span>
+     <span class="mi">9</span>  <span class="n">mail</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+    <span class="mi">10</span>  <span class="n">operator</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</pre></div>
+
+
+<p><strong>nl /etc/passwd | sed '2,5c "new content"'</strong> ：<strong>将2~5行的内容替换成字符串 "new content"</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># nl /etc/passwd | sed &#39;2,5c &quot;new content&quot;&#39;</span>
+     <span class="mi">1</span>  <span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="s2">&quot;new content&quot;</span>
+     <span class="mi">6</span>  <span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+     <span class="mi">7</span>  <span class="n">shutdown</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">6</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">shutdown</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">shutdown</span>
+     <span class="mi">8</span>  <span class="n">halt</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">halt</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">halt</span>
+     <span class="mi">9</span>  <span class="n">mail</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+    <span class="mi">10</span>  <span class="n">operator</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">11</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">operator</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</pre></div>
+
+
+<p><strong>nl /etc/passwd | sed '/root/d'</strong> ：<strong>删除/etc/passwd所包含root的行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># nl /etc/passwd | sed &#39;/root/d&#39;</span>
+     <span class="mi">2</span>  <span class="nb">bin</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+     <span class="mi">3</span>  <span class="n">daemon</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">daemon</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+     <span class="mi">4</span>  <span class="n">adm</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="n">adm</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">adm</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+     <span class="mi">5</span>  <span class="n">lp</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">lp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">lpd</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+     <span class="mi">6</span>  <span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+</pre></div>
+
+
+<p><strong>nl /etc/passwd | sed -e '3,$d' -e 's/root/mewusername/'</strong> ：<strong>提取到前两行数据，并将 root替换成 newusername</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># nl /etc/passwd | sed -e &#39;3,$d&#39; -e &#39;s/root/mewusername/&#39;</span>
+     <span class="mi">1</span>  <span class="n">mewusername</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+     <span class="mi">2</span>  <span class="nb">bin</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+
+<span class="o">-</span><span class="n">e</span> <span class="s1">&#39;3,$d&#39;</span>                       <span class="c1"># 删除/etc/passwd第三行到末尾的数据</span>
+<span class="o">-</span><span class="n">e</span> <span class="s1">&#39;s/root/nuwusername/&#39;</span>        <span class="c1"># 将搜索到的内容 root替换成 newusername</span>
+</pre></div>
+
+
+<h3>1.4 awk指令</h3>
+<p><strong>1、awk指令说明</strong></p>
+<p>1. awk是一种编程语言，用于在linux下对文本和数据进行处理</p>
+<p>2. awk的处理文件和数据处理方式是逐行扫描，寻找到匹配的行，并在这些行上进行你想要的操作</p>
+<p>3. 如果没有指定处理动作，则把匹配的行显示到屏幕上</p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="o">//</span>              <span class="o">#</span> <span class="err">匹配代码块，可以是字符串或正则表达式</span>
+<span class="err">{}</span>              <span class="o">#</span> <span class="err">命令代码块，包含一条或多条命令</span>
+<span class="err">$</span><span class="mi">0</span>              <span class="o">#</span> <span class="err">表示整个当前行</span>
+<span class="err">$</span><span class="mi">1</span>              <span class="o">#</span> <span class="err">每行第一个字段</span>
+<span class="n">NF</span>              <span class="o">#</span> <span class="err">字段数量变量</span>
+<span class="n">NR</span>              <span class="o">#</span> <span class="err">每行的记录号，多文件记录递增</span>
+<span class="o">/</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">][</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">+/</span>   <span class="o">#</span> <span class="err">两个或两个以上数字</span>
+<span class="o">/</span><span class="p">[</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">][</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="p">]</span><span class="o">*/</span>   <span class="o">#</span> <span class="err">一个或一个以上数字</span>
+<span class="o">-</span><span class="n">F</span><span class="s1">&#39;[:#/]&#39;</span>       <span class="o">#</span> <span class="err">定义三个分隔符</span>
+<span class="n">FNR</span>             <span class="o">#</span> <span class="err">与</span><span class="n">NR类似</span><span class="err">，不过多文件记录不递增，每个文件都从</span><span class="mi">1</span><span class="err">开始</span>
+<span class="err">\</span><span class="n">t</span>              <span class="o">#</span> <span class="err">制表符</span>
+<span class="err">\</span><span class="n">n</span>              <span class="o">#</span> <span class="err">换行符</span>
+<span class="n">FS</span>              <span class="o">#</span> <span class="n">BEGIN时定义分隔符</span>
+<span class="n">RS</span>              <span class="o">#</span> <span class="err">输入的记录分隔符，</span> <span class="err">默认为换行符</span><span class="p">(</span><span class="err">即文本是按一行一行输入</span><span class="p">)</span>
+<span class="o">~</span>               <span class="o">#</span> <span class="err">匹配，与</span><span class="o">==</span><span class="err">相比不是精确比较</span>
+<span class="o">!~</span>              <span class="o">#</span> <span class="err">不匹配，不精确比较</span>
+<span class="o">==</span>              <span class="o">#</span> <span class="err">等于，必须全部相等，精确比较</span>
+<span class="o">!=</span>              <span class="o">#</span> <span class="err">不等于，精确比较</span>
+<span class="o">&amp;&amp;</span>　            <span class="o">#</span> <span class="err">逻辑与</span>
+<span class="o">||</span>              <span class="o">#</span> <span class="err">逻辑或</span>
+<span class="o">+</span>               <span class="o">#</span> <span class="err">匹配时表示</span><span class="mi">1</span><span class="err">个或</span><span class="mi">1</span><span class="err">个以上</span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<p><strong>2、awk常用指令</strong></p>
+<p><strong>cat /etc/passwd |awk -F ':' '{print $1}'</strong> ：<strong>以冒号为分隔打印第一列数据</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># cat /etc/passwd |awk -F &#39;:&#39; &#39;{print $1}&#39;</span>
+<span class="n">root</span>
+<span class="nb">bin</span>
+<span class="n">daemon</span>
+<span class="n">adm</span>
+
+<span class="o">-</span><span class="n">F</span> <span class="s1">&#39;:&#39;</span>          <span class="c1"># 使用 &quot;:&quot; 来分隔</span>
+<span class="s1">&#39;{print $1}&#39;</span>    <span class="c1"># 打印第一列的数据</span>
+</pre></div>
+
+
+<p><strong>cat /etc/passwd | awk -F ':' '{print $1"\t"$7}'</strong> ：<strong>打印第一列和第七列数据，并以制表符分隔</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># cat /etc/passwd | awk -F &#39;:&#39; &#39;{print $1&quot;\t&quot;$7}&#39;</span>
+<span class="n">root</span>    <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="nb">bin</span>     <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">daemon</span>  <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">adm</span>     <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">lp</span>      <span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">sync</span>    <span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+
+<span class="s1">&#39;{print $1&quot;</span><span class="se">\t</span><span class="s1">&quot;$7}&#39;</span>        <span class="c1"># 打印第一列和第七列数据，并以制表符分隔</span>
+</pre></div>
+
+
+<p><strong>awk -F ':' '/root/{print $1}' /etc/passwd</strong> ：<strong>搜索/etc/passwd有root关键字的所有行，只显示第一行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># awk -F &#39;:&#39;  &#39;/root/{print $1}&#39; /etc/passwd</span>
+<span class="n">root</span>
+<span class="n">operator</span>
+</pre></div>
+
+
+<p><strong>w|awk 'NR==1{print $6}'</strong> ：<strong>显示第一行第六列的数据</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># w|awk &#39;NR==1{print $6}&#39;</span>
+<span class="mi">2</span>
+</pre></div>
+
+
+<p><strong>awk -F: 'NR==5 || NR==6{print}' /etc/passwd</strong> ：<strong>打印第五行和第六行数据</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># awk -F: &#39;NR==5 || NR==6{print}&#39; /etc/passwd </span>
+<span class="n">lp</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">lp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">lpd</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+</pre></div>
+
+
+<p><strong>awk '!/mysql/' /etc/passwd</strong> : <strong>匹配所有 不包含 "mysql"关键字的行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># awk &#39;!/mysql/&#39; /etc/passwd    </span>
+<span class="n">root</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="n">root</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">bash</span>
+<span class="nb">bin</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span><span class="p">:</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">daemon</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="mi">2</span><span class="p">:</span><span class="n">daemon</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">adm</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">3</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="n">adm</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">adm</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">lp</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">4</span><span class="p">:</span><span class="mi">7</span><span class="p">:</span><span class="n">lp</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">lpd</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+<span class="n">sync</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">5</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="n">sync</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="p">:</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">sync</span>
+</pre></div>
+
+
+<p><strong>awk '/mysql|mail/{print}' /etc/passwd</strong> : <strong>匹配包含mysql 或者 mail的行</strong></p>
+<div class="highlight"><pre><span></span><span class="p">[</span><span class="n">root</span><span class="nd">@linux</span><span class="o">-</span><span class="n">node1</span> <span class="n">aaa</span><span class="p">]</span><span class="c1"># awk &#39;/mysql|mail/{print}&#39; /etc/passwd </span>
+<span class="n">mail</span><span class="p">:</span><span class="n">x</span><span class="p">:</span><span class="mi">8</span><span class="p">:</span><span class="mi">12</span><span class="p">:</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">mail</span><span class="p">:</span><span class="o">/</span><span class="n">sbin</span><span class="o">/</span><span class="n">nologin</span>
+</pre></div></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

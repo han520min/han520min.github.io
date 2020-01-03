@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li class="active"><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>八大查找</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/Django八大查找.html">2019-08-09 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+		<div><h1>顺序查找</h1>
+<p>算法简介 顺序查找又称为线性查找，是一种最简单的查找方法。适用于线性表的顺序存储结构和链式存储结构。该算法的时间复杂度为O(n)。 基本思路 从第一个元素m开始逐个与需要查找的元素x进行比较，当比较到元素值相同(即m=x)时返回元素m的下标，如果比较到最后都没有找到，则返回-1。 优缺点 缺点：是当n 很大时，平均查找长度较大，效率低； 优点：是对表中数据元素的存储没有要求。另外，对于线性链表，只能进行顺序查找。 算法实现</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sequential_search</span><span class="p">(</span><span class="n">lis</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+  <span class="n">length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">length</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">lis</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">key</span><span class="p">:</span>
+      <span class="k">return</span> <span class="n">i</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+
+
+<h1>折半查找</h1>
+<p>二分查找（Binary Search），是一种在有序数组中查找某一特定元素的查找算法。查找过程从数组的中间元素开始，如果中间元素正好是要查找的元素，则查找过程结束；如果某一特定元素大于或者小于中间元素，则在数组大于或小于中间元素的那一半中查找，而且跟开始一样从中间元素开始比较。如果在某一步骤数组为空，则代表找不到。 这种查找算法每一次比较都使查找范围缩小一半。</p>
+<p>算法描述 给予一个包含 个带值元素的数组A 1、 令 L为0 ， R为 n-1 2、 如果L&gt;R，则搜索以失败告终 3、 令 m (中间值元素)为 ⌊(L+R)/2⌋ 4、 如果 AmT，令 R为 m - 1 并回到步骤二 复杂度分析 时间复杂度：折半搜索每次把搜索区域减少一半，时间复杂度为 O(logn) 空间复杂度：O(1)</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">lis</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+  <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">high</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">:</span>
+    <span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="nb">int</span><span class="p">((</span><span class="n">low</span> <span class="o">+</span> <span class="n">high</span><span class="p">)</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">lis</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+      <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">lis</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+      <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># 打印折半的次数</span>
+      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;times: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">time</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">mid</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;times: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">time</span><span class="p">)</span>
+  <span class="k">return</span> <span class="bp">False</span>
+</pre></div>
+
+
+<h1>插值查找</h1>
+<p>算法简介</p>
+<p>插值查找是根据要查找的关键字key与查找表中最大最小记录的关键字比较后的 查找方法，其核心就在于插值的计算公式 (key-a[low])/(a[high]-a[low])*(high-low)。 时间复杂度o(logn)但对于表长较大而关键字分布比较均匀的查找表来说，效率较高。</p>
+<p>算法思想 基于二分查找算法，将查找点的选择改进为自适应选择，可以提高查找效率。当然，差值查找也属于有序查找。 注：对于表长较大，而关键字分布又比较均匀的查找表来说，插值查找算法的平均性能比折半查找要好的多。反之，数组中如果分布非常不均匀，那么插值查找未必是很合适的选择。</p>
+<p>复杂度分析 时间复杂性：如果元素均匀分布，则O（log log n）），在最坏的情况下可能需要O（n）。 空间复杂度：O（1）。</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">binary_search</span><span class="p">(</span><span class="n">lis</span><span class="p">,</span> <span class="n">key</span><span class="p">):</span>
+  <span class="n">low</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">high</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">lis</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span>
+  <span class="n">time</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="k">while</span> <span class="n">low</span> <span class="o">&lt;</span> <span class="n">high</span><span class="p">:</span>
+    <span class="n">time</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="c1"># 计算mid值是插值算法的核心代码</span>
+    <span class="n">mid</span> <span class="o">=</span> <span class="n">low</span> <span class="o">+</span> <span class="nb">int</span><span class="p">((</span><span class="n">high</span> <span class="o">-</span> <span class="n">low</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="n">key</span> <span class="o">-</span> <span class="n">lis</span><span class="p">[</span><span class="n">low</span><span class="p">])</span><span class="o">/</span><span class="p">(</span><span class="n">lis</span><span class="p">[</span><span class="n">high</span><span class="p">]</span> <span class="o">-</span> <span class="n">lis</span><span class="p">[</span><span class="n">low</span><span class="p">]))</span>
+    <span class="k">print</span><span class="p">(</span><span class="s2">&quot;mid=</span><span class="si">%s</span><span class="s2">, low=</span><span class="si">%s</span><span class="s2">, high=</span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="p">(</span><span class="n">mid</span><span class="p">,</span> <span class="n">low</span><span class="p">,</span> <span class="n">high</span><span class="p">))</span>
+    <span class="k">if</span> <span class="n">key</span> <span class="o">&lt;</span> <span class="n">lis</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+      <span class="n">high</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">-</span> <span class="mi">1</span>
+    <span class="k">elif</span> <span class="n">key</span> <span class="o">&gt;</span> <span class="n">lis</span><span class="p">[</span><span class="n">mid</span><span class="p">]:</span>
+      <span class="n">low</span> <span class="o">=</span> <span class="n">mid</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="k">else</span><span class="p">:</span>
+      <span class="c1"># 打印查找的次数</span>
+      <span class="k">print</span><span class="p">(</span><span class="s2">&quot;times: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">time</span><span class="p">)</span>
+      <span class="k">return</span> <span class="n">mid</span>
+  <span class="k">print</span><span class="p">(</span><span class="s2">&quot;times: </span><span class="si">%s</span><span class="s2">&quot;</span> <span class="o">%</span> <span class="n">time</span><span class="p">)</span>
+  <span class="k">return</span> <span class="bp">False</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s1">&#39;__main__&#39;</span><span class="p">:</span>
+  <span class="n">LIST</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">22</span><span class="p">,</span> <span class="mi">54</span><span class="p">,</span> <span class="mi">99</span><span class="p">,</span> <span class="mi">123</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">222</span><span class="p">,</span> <span class="mi">444</span><span class="p">]</span>
+  <span class="n">result</span> <span class="o">=</span> <span class="n">binary_search</span><span class="p">(</span><span class="n">LIST</span><span class="p">,</span> <span class="mi">444</span><span class="p">)</span>
+  <span class="k">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>
+</pre></div></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

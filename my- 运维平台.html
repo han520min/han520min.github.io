@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li class="active"><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>运维平台</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/my- 运维平台.html">2018-10-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/yun-wei.html">运维</a>
+tags: <a href="/tag/devops.html">devops</a> </div>
+		<div><h2>1.1 运维平台</h2>
+<h3>工单系统：</h3>
+<p>​           1、服务器（CMDB）</p>
+<div class="highlight"><pre><span></span>                机房实施申请
+                机器上下架
+                申请 开发机/测试机/线上机器
+                申请机器权限
+                申请对特定机器添加一些特定监控
+                资源扩容
+                申请集群
+                数据库资源申请
+                内网/外网 域名申请
+                虚拟机回收
+</pre></div>
+
+
+<p>​       2、IT/实施</p>
+<div class="highlight"><pre><span></span>            私有云新场地实施
+            私有云新场地上线
+</pre></div>
+
+
+<p>​           3、会和openstack平台对接</p>
+<h3>CMDB：</h3>
+<p>​           1、主要功能</p>
+<div class="highlight"><pre><span></span>        <span class="err">（</span><span class="mi">1</span><span class="err">）自动采集：</span>
+                    <span class="mi">1</span><span class="err">、机器信息入</span><span class="n">CMDB</span>
+                        <span class="err">从工单系统录入机器信息</span>
+                        <span class="err">人员手动录入</span><span class="o">/</span><span class="err">导入机器信息</span>
+                    <span class="mi">2</span><span class="err">、</span><span class="n">redis</span><span class="o">/</span><span class="n">RabbitMQ</span><span class="o">+</span><span class="n">celery</span><span class="o">+</span><span class="n">saltstack</span>
+        <span class="err">（</span><span class="mi">2</span><span class="err">）数据可视化</span>
+        <span class="err">（</span><span class="mi">3</span><span class="err">）提供</span><span class="n">API对接各系统实现自动化</span>
+</pre></div>
+
+
+<p>​       2、API对接系统</p>
+<p>​       3、会接到工单的消息，CMDB会把数据保存起来然后返回，这是都是一些简单的信息</p>
+<h3>监控系统</h3>
+<p>保证线上监控使我们服务的眼睛</p>
+<h3>MIS</h3>
+<p>​       主要功能：管理人员</p>
+<h3>ELK日志系统</h3>
+<p>​       主要功能：记录后台服务器产生的log日志（可分散存储在不同日志上）</p>
+<h3>LDAP</h3>
+<p>​      主要功能： 负责登录、认证、身份验证</p>
+<h3>CI/CD</h3>
+<p>​       主要功能：自动发布，持续部署</p>
+<h3>FAQ</h3>
+<p>​       主要功能：负责查询</p>
+<p>​       1、常见的问题项目与对应问题的解答；2、良好平均品质；3、FAQ检索系统。</p>
+<h3>培训系统</h3>
+<p>对员工技能的培训</p>
+<h3>OpenStack平台</h3>
+<p>​   　用request模块返回给工单系统</p>
+<div class="highlight"><pre><span></span>1、Horizon（控制台），又名Dashboard
+
+　　　　　　就是web展示界面操作平台，方便用户交互的
+
+2、Nova（计算）
+
+　　　　　　负责创建，调度，销毁云主机
+
+3、Neutron（网络）
+
+　　　　　　负责实现SDN
+
+4、Swift（对象存储）
+
+　　　　　　目录结构存储数据
+
+5、Cinder（块存储）
+
+　　　　　　提供持久化块存储，即为云主机提供附加云盘
+
+6、Glance（镜像）
+
+　　　　　　提供镜像服务，装机使用
+
+7、Keystone（认证）
+
+　　　　　　为访问openstack各组件提供认证和授权功能，认证通过后，提供一个服务列表（存放你有权访问的          服务），可以通过该列表访问各个组件
+
+8、Ceilometer（计费）
+
+　　　　　　很明显自用的根本不需要这功能，而且所谓的监控其实根本也算不上什么监控，监控性能，计费
+
+9、Heat（编排）
+
+　　　　　　这个太高大上了，就目前阶段正常企业还搞不定
+
+　　　　　　自动化部署应用，自动化管理应用的整个生命周期.主要用于Paas 
+</pre></div></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

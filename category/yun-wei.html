@@ -28,10 +28,18 @@
 		<div class="container-fluid">
 		  <a class="brand" href="/">韩敏的技术博客</a>
 			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
 					<li ><a href="/category/django.html">Django</a></li>
 					<li ><a href="/category/git.html">GIT</a></li>
 					<li ><a href="/category/ji-zhu.html">技术</a></li>
-					<li ><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
 					<li ><a href="/category/vue.html">VUE</a></li>
 					<li class="active"><a href="/category/yun-wei.html">运维</a></li>
 			</ul>
@@ -60,21 +68,43 @@
 	  <div class="content">
 <div class="page-header"><h1>韩敏的技术博客 <small>运维</small></h1></div>
 <div class='article'>
-	<h2>DevOps介绍</h2>
-	<div class="well small">Permalink: <a class="more" href="/my-DevOps介绍.html">2017-12-24 18:44:00+01:00</a>
+	<h2>运维平台</h2>
+	<div class="well small">Permalink: <a class="more" href="/my- 运维平台.html">2018-10-08 18:44:00+02:00</a>
 by <a class="url fn" href="/author/han-min.html">韩敏 </a>
  in <a href="/category/yun-wei.html">运维</a>
-tags: <a href="/tag/shang.html">shang</a> </div>
-	<div class="summary"><h1>1.1DevOps介绍</h1>
-<h2>1、DevOps定义（是一种思想，大型公司）</h2>
-<p>​       1、DevOps是“开发”和“运维”的缩写。</p>
-<p>​       2、透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。</p>
-<h2>2、DevOps持续交付环</h2>
-<p>​       1、开发交付：计划 - - &gt; 编码 - - &gt; 构架 - - &gt; 测试 - - &gt; 版本 - - &gt; 部署 - - &gt; 运维 - - &gt; 监控</p>
-<h2>3、传统交付</h2>
-<p>​       持续集成：代码合并，构建，部署，测试，不断进行，对结果反馈</p>
-<p>​       持续部署：将产品部署在测试环境，预生产环境，生产环境</p>
-<p>运维：维护线上服务的稳定，底层平台的运行 …</p> <a class="btn primary xsmall" href="/my-DevOps介绍.html">more…</a>
+tags: <a href="/tag/devops.html">devops</a> </div>
+	<div class="summary"><h2>1.1 运维平台</h2>
+<h3>工单系统：</h3>
+<p>​           1、服务器（CMDB）</p>
+<div class="highlight"><pre><span></span>                机房实施申请
+                机器上下架
+                申请 开发机/测试机/线上机器
+                申请机器权限
+                申请对特定机器添加一些特定监控
+                资源扩容
+                申请集群
+                数据库资源申请
+                内网/外网 域名申请
+                虚拟机回收
+</pre></div>
+
+
+<p>​       2、IT/实施</p>
+<div class="highlight"><pre><span></span>            私有云新场地实施
+            私有云新场地上线
+</pre></div>
+
+
+<p>​           3、会和openstack平台对接</p>
+<h3>CMDB：</h3>
+<p>​           1、主要功能</p>
+<div class="highlight"><pre><span></span>        <span class="err">（</span><span class="mi">1</span><span class="err">）自动采集：</span>
+                    <span class="mi">1</span><span class="err">、机器信息入</span><span class="n">CMDB</span>
+                        <span class="err">从工单系统录入机器信息</span>
+                        <span class="err">人员手动录入</span><span class="o">/</span><span class="err">导入机器信息</span>
+                    <span class="mi">2</span><span class="err">、</span><span class="n">redis</span><span class="o">/</span><span class="n">RabbitMQ</span><span class="o">+</span><span class="n">celery</span><span class="o">+</span><span class="n">saltstack</span>
+        <span class="err">（</span><span class="mi">2</span><span class="err">）数据可视化</span>
+        <span class="err">（</span><span class="mi">3</span><span class="err">）提供</span><span class="n">API对接各系统实现自动化 …</span></pre></div> <a class="btn primary xsmall" href="/my- 运维平台.html">more…</a>
 	</div>
 </div>	
 

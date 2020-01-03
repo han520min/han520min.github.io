@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li class="active"><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>celery面试阐述</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/celery面试.html">2017-12-24 18:44:00+01:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/celery.html">celery</a>
+tags: <a href="/tag/celery.html">celery</a> </div>
+		<div><h2>1.1面试从哪几个方面介绍celery</h2>
+<ul>
+<li>
+<h3>What：什么是cerlery</h3>
+</li>
+<li>
+<h3>Where : 在哪里用</h3>
+</li>
+<li>
+<h3>Why : 为什么</h3>
+</li>
+<li>
+<h3>How ： 如何用</h3>
+</li>
+</ul>
+<p>​     接下来开始正题啦</p>
+<hr>
+<p>1 .  面试官想要什么答案？</p>
+<ul>
+<li>
+<p>面试官希望能给结合项目中的业务来回答问题</p>
+</li>
+<li>
+<p>对celery原理机制有自己的见解</p>
+</li>
+<li>
+<p>对celery的缺点也有自己的认知</p>
+</li>
+<li>
+<p>如果能说明白有哪些方案能替代celery，为什么当时选取的celery就更好了</p>
+</li>
+<li>
+<p>针对这道题回答思路是什么？</p>
+<ul>
+<li>
+<p>能够用简明通俗的语句说明白celery的特点(what)</p>
+</li>
+<li>
+<p>然后剖析celery常见的使用场景(where)</p>
+</li>
+<li>
+<p>项目中遇到什么业务场景而选用celery解决(why)</p>
+</li>
+<li>
+<p>我们在项目中是如何使用celery(how)</p>
+</li>
+<li>
+<p>细节1：使用celery遇到的坑</p>
+</li>
+<li>
+<p>细节2：反思有没有更好的解决方案，为什么</p>
+<ul>
+<li>celery ：分布式消息队列（定时任务，异步任务）每分钟官方上可以执行上百万了任务（高效处理）</li>
+</ul>
+<blockquote>
+<p>celery beat : 把任务发送给队列</p>
+<p>Broker ： 消息队列</p>
+<p>Producer：产生任务交给任务对列</p>
+<p>celery worker ：执行任务的消费者</p>
+<p>Request Backend：任务完成，保持状态</p>
+</blockquote>
+<ul>
+<li>异步任务</li>
+</ul>
+<blockquote>
+<p>1.工单系统自动化</p>
+<p>2.移动审批通知</p>
+</blockquote>
+<ul>
+<li>定时任务</li>
+</ul>
+<blockquote>
+<p>1.工单延时任务</p>
+<p>2.CMDB定时同步机器信息</p>
+<p>3.监控系统定时拉取zabbix监控信息统一报警</p>
+</blockquote>
+<ul>
+<li>Why</li>
+</ul>
+<blockquote>
+<p>1.场景分析</p>
+<p>​       比如自动化工单，初始化10台机器需要30分钟，那么前端提交完工单后要等待后端初始化机器结果，页面会卡30分钟，这种结果用户事物接受的</p>
+<p>2.多线程为什么不能解决</p>
+<p>​      join（）：实现所有线程都执行结束后在执行主线程（还会卡30分钟）</p>
+<p>​       SetDaemon（）：守护线程，主线程退出时，需要子线程随主线程退出（主线程退出，任务结束）</p>
+<p>3.celery实现原理</p>
+<p>​       当工单页面（生产者）产生初始化机器任务，但celery不会等着结果返回，而是给你返回一个任务ID，过一段时间只需要拿着这个任务ID就可以拿到任务执行结果，前端直接返回无需等待</p>
+</blockquote>
+<ul>
+<li>How</li>
+</ul>
+<blockquote>
+<ol>
+<li>
+<p>celery.py ：配置celery参数</p>
+</li>
+<li>
+<p><strong>init</strong>.py:中添加配置，告诉Django在启动时别忘了检测我的celery文件</p>
+</li>
+<li>
+<p>task.py：Django中会自动到每个app中找到task.py文件中使用celery处理对应函数</p>
+</li>
+</ol>
+<p>备注：可以使用RabbitMQ/Redis来作为Broker/Backend</p>
+</blockquote>
+</li>
+<li>
+<p>执行celery遇到的坑：</p>
+<blockquote>
+<p>启动celery异步任务时, 报: KeyError: 'backend'</p>
+<p>from . import async, base
+^
+SyntaxError: invalid syntax</p>
+<p>异常原因: Python3.6及其以上的版本已经将async收入关键字中, 而celery4.0版本也用到async, 如果不配置backend的话是不会有这个异常的.</p>
+<p>解决方案: 第一种: 将celery的版本将为2.10.6,  第二种: 将celery依赖中的async更名为其他名称即可</p>
+<p>启动celery成功, 调用任务时报错: [2019-03-04 19:13:17,567: ERROR/MainProcess] Received unregistered task of type 'celery_test1.test'.
+The message has been ignored and discarded.</p>
+<p>Did you remember to import the module containing this task?
+Or maybe you're using relative imports?</p>
+<p>Please see
+http://docs.celeryq.org/en/latest/internals/protocol.html
+for more information.</p>
+<p>The full contents of the message body was:
+b'[[], {}, {"callbacks": null, "errbacks": null, "chain": null, "chord": null}]' (77b)
+Traceback (most recent call last):
+File "c:\program files (x86)\python37-32\lib\site-packages\celery\worker\consumer\consumer.py", line 558, in on_task_received
+strategy = strategies[type_]
+KeyError: 'celery_test1.test'</p>
+<p>解决方案: 不要将异步任务函数的定义和调用写到同一个文件中 </p>
+<p>启动celery后调用任务后报错:
+ERROR/MainProcess Unrecoverable error: AttributeError("'str' object has no attribute 'items'")
+解决方案: 将 redis版本降低到 2.10.6 , pip install redis==2.10.6</p>
+<p>[2017-08-02 19:59:04,777: ERROR/MainProcess] Task handler raised error: ValueError('not enough values to unpack (expected 3, got 0)',)
+Traceback (most recent call last):
+File "d:\python\python36-32\lib\site-packages\billiard\pool.py", line 358, in workloop
+result = (True, prepare_result(fun(*args, <strong>kwargs)))
+File "d:\python\python36-32\lib\site-packages\celery\app\trace.py", line 525, in _fast_trace_task
+tasks, accept, hostname = _loc
+ValueError: not enough values to unpack (expected 3, got 0)
+[2017-08-02 20:04:30,870: INFO/MainProcess] Received task: mytask.hello[ec84d3ba-98ac-44bc-be5e-09190c2712e0]
+[2017-08-02 20:04:30,873: ERROR/MainProcess] Task handler raised error: ValueError('not enough values to unpack (expected 3, got 0)',)
+Traceback (most recent call last):
+File "d:\python\python36-32\lib\site-packages\billiard\pool.py", line 358, in workloop
+result = (True, prepare_result(fun(*args, </strong>kwargs)))
+File "d:\python\python36-32\lib\site-packages\celery\app\trace.py", line 525, in _fast_trace_task
+tasks, accept, hostname = _loc
+ValueError: not enough values to unpack (expected 3, got 0)</p>
+<p>解决方案: 第一种: Try to uninstall celery 4.1.0 and replace to 3.1.24 
+                第二种: pip install eventlet, 启动celeryworker时: celery -A celery_app worker --loglevel=info -P eventlet</p>
+<h5>一、delay函数或者apply_async函数的传参问题</h5>
+<p>1、通过delay或者apply_async传参数给异步任务的时候不能传实例，否则会报错raised unexpected: EncodeError(TypeError('<ExtractCashRecord: ExtractCashRecord object> is not JSON serializable，因为我传的参数有一个是ExtractCashRecord这个类的实例。</p>
+<h5>二、任务重复执行</h5>
+<p>celery使用redis作为broker的话，apply_async的异步任务如果执行之间是延迟超过1小时的话，celery会重复发布任务，会导致任务重复执行。这个在官方文档中有说明<a href="http://docs.celeryproject.org/en/latest/getting-started/brokers/redis.html#visibility-timeout">celery文档</a></p>
+<blockquote>
+<p>if a task isn’t acknowledged within the Visibility Timeout the task will be redelivered to another worker and executed.This causes problems with ETA/countdown/retry tasks where the time to execute exceeds the visibility timeout; in fact if that happens it will be executed again, and again in a loop.So you have to increase the visibility timeout to match the time of the longest ETA you’re planning to use.Note that Celery will redeliver messages at worker shutdown, so having a long visibility timeout will only delay the redelivery of ‘lost’ tasks in the event of a power failure or forcefully terminated workers.Periodic tasks won’t be affected by the visibility timeout, as this is a concept separate from ETA/countdown.You can increase this timeout by configuring a transport option with the same name:
+app.conf.broker_transport_options = {'visibility_timeout': 43200}*
+The value must be an int describing the number of seconds.</p>
+</blockquote>
+<p>这个时候，我们就需要在配置文件里面增加一项，来增大visibility_timeout的时间
+<code>BROKER_TRANSPORT_OPTIONS = {'visibility_timeout': 43200}</code>
+或者
+<code>app.conf.broker_transport_options = {'visibility_timeout': 43200}</code></p>
+</blockquote>
+</li>
+</ul>
+</li>
+</ul></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>
