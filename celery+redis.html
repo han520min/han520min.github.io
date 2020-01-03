@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li class="active"><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>celery介绍</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/celery+redis.html">2017-12-24 18:44:00+01:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/celery.html">celery</a>
+tags: <a href="/tag/celery.html">celery</a> </div>
+		<div><h3>1.1 Celery介绍</h3>
+<p><strong>1、celery应用举例</strong></p>
+<p>1、Celery 是一个 基于python开发的分布式异步消息任务队列，通过它可以轻松的实现任务的异步处理，
+　　　　　　 　　 如果你的业务场景中需要用到异步任务，就可以考虑使用celery</p>
+<p>2、你想对100台机器执行一条批量命令，可能会花很长时间 ，但你不想让你的程序等着结果返回，而是给你返回 一个任务ID,
+　　　　　　　　你过一段时间只需要拿着这个任务id就可以拿到任务执行结果， 在任务执行ing进行时，你可以继续做其它的事情</p>
+<p>3、Celery 在执行任务时需要通过一个消息中间件来接收和发送任务消息，以及存储任务结果， 一般使用rabbitMQ or Redis</p>
+<p><strong>2、Celery有以下优点</strong></p>
+<p>1、简单：一单熟悉了celery的工作流程后，配置和使用还是比较简单的</p>
+<p>2、高可用：当任务执行失败或执行过程中发生连接中断，celery 会自动尝试重新执行任务</p>
+<p>3、快速：一个单进程的celery每分钟可处理上百万个任务</p>
+<p>4、灵活： 几乎celery的各个组件都可以被扩展及自定制</p>
+<p><strong>3、Celery基本工作流程图</strong></p>
+<p><img alt="img" src="https://images2018.cnblogs.com/blog/1080958/201807/1080958-20180713110226832-1531245622.png"></p>
+<p><strong>user：</strong>用户程序，用于告知celery去执行一个任务。
+　　　　<strong>broker:</strong> 存放任务（依赖RabbitMQ或Redis，进行存储）
+　　　　<strong>worker：</strong>执行任务</p>
+<p><strong>4、Celery 特性</strong> </p>
+<p>1）方便查看定时任务的执行情况, 如 是否成功, 当前状态, 执行任务花费的时间等.</p>
+<p>2）可选 多进程, Eventlet 和 Gevent 三种模型并发执行.</p>
+<p>3）Celery 是语言无关的.它提供了python 等常见语言的接口支持.</p>
+<h3>1.2 celery 组件</h3>
+<p><strong>1、Celery 扮演生产者和消费者的角色</strong></p>
+<p><strong>Celery Beat :</strong> 任务调度器. Beat 进程会读取配置文件的内容, 周期性的将配置中到期需要执行的任务发送给任务队列.</p>
+<p><strong>Celery Worker :</strong> 执行任务的消费者, 通常会在多台服务器运行多个消费者, 提高运行效率.</p>
+<p><strong>Broker :</strong> 消息代理, 队列本身. 也称为消息中间件. 接受任务生产者发送过来的任务消息, 存进队列再按序分发给任务消费方(通常是消息队列或者数据库).</p>
+<p><strong>Producer :</strong> 任务生产者. 调用 Celery API , 函数或者装饰器, 而产生任务并交给任务队列处理的都是任务生产者.</p>
+<p><strong>Result Backend :</strong> 任务处理完成之后保存状态信息和结果, 以供查询.</p>
+<p><strong>2、celery架构图</strong></p>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1080958/201907/1080958-20190710202519443-152801664.png"></p>
+<p><strong>3. 产生任务的方式</strong> </p>
+<p>1) 发布者发布任务(WEB 应用)</p>
+<p>2) 任务调度按期发布任务(定时任务)</p>
+<p><strong>4. celery 依赖三个库: 这三个库, 都由 Celery 的开发者开发和维护.</strong></p>
+<p><strong>billiard :</strong> 基于 Python2.7 的 multisuprocessing 而改进的库, 主要用来提高性能和稳定性.</p>
+<p><strong>librabbitmp :</strong> C 语言实现的 Python 客户端</p>
+<p><strong>kombu :</strong> Celery 自带的用来收发消息的库, 提供了符合 Python 语言习惯的, 使用 AMQP 协议的高级借口.</p>
+<h3>1.3 安装相关包 与 管理命令</h3>
+<p><strong>1、安装相关软件包</strong></p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="n">pip3</span> <span class="n">install</span> <span class="n">Django</span><span class="o">==</span><span class="mi">2</span><span class="p">.</span><span class="mi">0</span><span class="p">.</span><span class="mi">4</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">celery</span><span class="o">==</span><span class="mi">4</span><span class="p">.</span><span class="mi">3</span><span class="p">.</span><span class="mi">0</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">redis</span><span class="o">==</span><span class="mi">3</span><span class="p">.</span><span class="mi">2</span><span class="p">.</span><span class="mi">1</span>
+<span class="n">pip3</span> <span class="n">install</span>  <span class="n">django</span><span class="o">-</span><span class="n">celery</span><span class="o">==</span><span class="mi">3</span><span class="p">.</span><span class="mi">1</span><span class="p">.</span><span class="mi">17</span>
+<span class="n">pip3</span> <span class="n">install</span> <span class="n">ipython</span><span class="o">==</span><span class="mi">7</span><span class="p">.</span><span class="mi">6</span><span class="p">.</span><span class="mi">1</span> 
+
+<span class="n">find</span> <span class="p">.</span><span class="o">/</span> <span class="o">-</span><span class="k">type</span> <span class="n">f</span> <span class="o">|</span> <span class="n">xargs</span> <span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;s/\r$//g&#39;</span>  <span class="o">#</span> <span class="err">批量将当前文件夹下所有文件装换成</span><span class="n">unix格式</span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<p><strong>2、celery管理</strong></p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="n">celery</span> <span class="n">multi</span> <span class="k">start</span> <span class="n">w1</span> <span class="n">w2</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span>     <span class="o">#</span><span class="err">一次性启动</span><span class="n">w1</span><span class="p">,</span><span class="n">w2两个worker</span>
+<span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span> <span class="n">status</span>                        <span class="o">#</span><span class="err">查看当前有哪些</span><span class="n">worker在运行</span>
+<span class="n">celery</span> <span class="n">multi</span> <span class="n">stop</span> <span class="n">w1</span> <span class="n">w2</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span>              <span class="o">#</span><span class="err">停止</span><span class="n">w1</span><span class="p">,</span><span class="n">w2两个worker</span>
+
+<span class="n">celery</span>  <span class="n">multi</span> <span class="k">start</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">l</span> <span class="n">debug</span> <span class="c1">--autoscale=50,5        # celery并发数：最多50个，最少5个</span>
+<span class="n">ps</span> <span class="n">auxww</span><span class="o">|</span><span class="n">grep</span> <span class="ss">&quot;celery worker&quot;</span><span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="n">grep</span><span class="o">|</span><span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span><span class="o">|</span><span class="n">xargs</span> <span class="n">kill</span> <span class="o">-</span><span class="mi">9</span>       <span class="o">#</span> <span class="err">关闭所有</span><span class="n">celery进程</span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<p><strong>3、django_celery_beat管理</strong></p>
+<div class="highlight"><pre><span></span><span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_test</span> <span class="n">beat</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span> <span class="o">-</span><span class="n">S</span> <span class="n">django</span>                   <span class="o">#</span><span class="err">启动心跳任务</span>
+<span class="n">ps</span> <span class="o">-</span><span class="n">ef</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">E</span> <span class="ss">&quot;celery -A celery_test beat&quot;</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="n">grep</span><span class="o">|</span> <span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span> <span class="o">|</span> <span class="n">xargs</span> <span class="n">kill</span> <span class="o">-</span><span class="n">TERM</span> <span class="o">&amp;&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="k">null</span>  <span class="o">#</span> <span class="err">杀死心跳所有进程</span>
+</pre></div>
+
+
+<h3>1.3 安装相关包 与 管理命令</h3>
+<p><strong>1、在Django中使用celery介绍（celery无法再windows下运行）</strong></p>
+<p>1）在Django中使用celery时，celery文件必须以tasks.py</p>
+<p>2）Django会自动到每个APP中找tasks.py文件</p>
+<p><strong>2、创建一个Django项目celery_test，和app01</strong></p>
+<p><strong>3、在与项目同名的目录下创建celery.py</strong></p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> <strong>celery.py</strong></p>
+<p><strong>4、在与项目同名的目录下的 init.py 文件中添加下面内容</strong></p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> <strong>init</strong>.py</p>
+<p><strong>5、创建app01/tasks.py文件</strong></p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> app01/tasks.py</p>
+<p><strong>6、将celery_test这个Django项目拷贝到centos7.3的django_test文件夹中</strong></p>
+<p><strong>7、保证启动了redis-server</strong></p>
+<p><strong>8、启动一个celery的worker</strong></p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="n">celery</span> <span class="n">multi</span> <span class="k">start</span> <span class="n">w1</span> <span class="n">w2</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span>     <span class="o">#</span><span class="err">一次性启动</span><span class="n">w1</span><span class="p">,</span><span class="n">w2两个worker</span>
+<span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span> <span class="n">status</span>                        <span class="o">#</span><span class="err">查看当前有哪些</span><span class="n">worker在运行</span>
+<span class="n">celery</span> <span class="n">multi</span> <span class="n">stop</span> <span class="n">w1</span> <span class="n">w2</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_pro</span>              <span class="o">#</span><span class="err">停止</span><span class="n">w1</span><span class="p">,</span><span class="n">w2两个worker</span>
+
+<span class="n">celery</span>  <span class="n">multi</span> <span class="k">start</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">l</span> <span class="n">debug</span> <span class="c1">--autoscale=50,5        # celery并发数：最多50个，最少5个</span>
+<span class="n">ps</span> <span class="n">auxww</span><span class="o">|</span><span class="n">grep</span> <span class="ss">&quot;celery worker&quot;</span><span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="n">grep</span><span class="o">|</span><span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span><span class="o">|</span><span class="n">xargs</span> <span class="n">kill</span> <span class="o">-</span><span class="mi">9</span>       <span class="o">#</span> <span class="err">关闭所有</span><span class="n">celery进程</span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<p><strong>9、测试celery</strong></p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> <strong>测试</strong></p>
+<h3>1.5 在django中使用计划任务功能</h3>
+<p><strong>1、在Django中使用celery的定时任务需要安装django-celery-beat</strong></p>
+<p>pip3 install django-celery-beat</p>
+<p><strong>2、在Django的settings中注册django_celery_beat</strong></p>
+<div class="highlight"><pre><span></span><span class="n">INSTALLED_APPS</span> <span class="o">=</span> <span class="p">(</span>
+    <span class="p">...,</span>
+    <span class="s1">&#39;django_celery_beat&#39;</span><span class="p">,</span>
+<span class="p">)</span>
+</pre></div>
+
+
+<p><strong>3、执行创建表命令</strong></p>
+<p>python3 manage.py makemigrations</p>
+<p>python3 manage.py migrate</p>
+<p><strong>4、在与项目同名的目录下的celery.py中添加定时任务</strong></p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> <strong>celery.py</strong></p>
+<p><strong>5、app01/tasks.py</strong>　　</p>
+<p><img alt="img" src="https://images.cnblogs.com/OutliningIndicators/ContractedBlock.gif"> <strong>app01/tasks.py</strong></p>
+<p><strong>6、管理命令</strong></p>
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<div class="highlight"><pre><span></span><span class="s1">&#39;&#39;&#39;1、celery管理 &#39;&#39;&#39;</span>
+<span class="n">celery</span>  <span class="n">multi</span> <span class="k">start</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_test</span> <span class="o">-</span><span class="n">l</span> <span class="n">debug</span> <span class="c1">--autoscale=50,5        # celery并发数：最多50个，最少5个</span>
+<span class="n">ps</span> <span class="n">auxww</span><span class="o">|</span><span class="n">grep</span> <span class="ss">&quot;celery worker&quot;</span><span class="o">|</span><span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="n">grep</span><span class="o">|</span><span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span><span class="o">|</span><span class="n">xargs</span> <span class="n">kill</span> <span class="o">-</span><span class="mi">9</span>       <span class="o">#</span> <span class="err">关闭所有</span><span class="n">celery进程</span>
+
+<span class="s1">&#39;&#39;&#39;2、django-celery-beat心跳服务管理 &#39;&#39;&#39;</span>
+<span class="n">celery</span> <span class="o">-</span><span class="n">A</span> <span class="n">celery_test</span> <span class="n">beat</span> <span class="o">-</span><span class="n">l</span> <span class="n">info</span> <span class="o">-</span><span class="n">S</span> <span class="n">django</span>                   <span class="o">#</span><span class="err">启动心跳任务</span>
+<span class="n">ps</span> <span class="o">-</span><span class="n">ef</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">E</span> <span class="ss">&quot;celery -A celery_test beat&quot;</span> <span class="o">|</span> <span class="n">grep</span> <span class="o">-</span><span class="n">v</span> <span class="n">grep</span><span class="o">|</span> <span class="n">awk</span> <span class="s1">&#39;{print $2}&#39;</span> <span class="o">|</span> <span class="n">xargs</span> <span class="n">kill</span> <span class="o">-</span><span class="n">TERM</span> <span class="o">&amp;&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="k">null</span>  <span class="o">#</span> <span class="err">杀死心跳所有进程</span>
+</pre></div>
+
+
+<p><a href="javascript:void(0);"><img alt="复制代码" src="https://common.cnblogs.com/images/copycode.gif"></a></p>
+<h3>1.6 <strong>使用 Celery Once 来防止 Celery 重复执行同一个任务</strong></h3>
+<p><strong>1、</strong><strong>产生重复执行原因</strong>　</p>
+<p>1. 当我们设置一个ETA（预估执行时间）比visibility_timeout（超时时间）长的任务时，会出现重复执行问题</p>
+<p>2. 因为每过一次 visibility_timeout 时间，celery就会认为这个任务没被worker执行成功，重新分配给其它worker再执行</p>
+<p><strong>2、Celery Once解决方法</strong></p>
+<p><em>1.</em> Celery Once 也是利用 Redis 加锁来实现，他的使用非常简单，参照 GitHub 的使用很快就能够用上。</p>
+<p><em>2. Celery Once 在 Task 类基础上实现了 QueueOnce 类，该类提供了任务去重的功能</em></p>
+<p><em>3. 所以在使用时，我们自己实现的方法需要将 QueueOnce 设置为 base</em></p>
+<div class="highlight"><pre><span></span>@<span class="nv">celery</span>.<span class="nv">task</span><span class="ss">(</span><span class="nv">base</span><span class="o">=</span><span class="nv">QueueOnce</span>, <span class="nv">once</span><span class="o">=</span>{<span class="s1">&#39;</span><span class="s">keys</span><span class="s1">&#39;</span>: [<span class="s1">&#39;</span><span class="s">a</span><span class="s1">&#39;</span>]}<span class="ss">)</span>
+<span class="nv">def</span> <span class="nv">slow_add</span><span class="ss">(</span><span class="nv">a</span>, <span class="nv">b</span><span class="ss">)</span>:
+    <span class="nv">sleep</span><span class="ss">(</span><span class="mi">30</span><span class="ss">)</span>
+    <span class="k">return</span> <span class="nv">a</span> <span class="o">+</span> <span class="nv">b</span>
+</pre></div>
+
+
+<p>4. 后面的 once 参数表示，在遇到重复方法时的处理方式，默认 graceful 为 False，那样 Celery 会抛出 AlreadyQueued 异常，手动设置为 True，则静默处理。</p>
+<p><em>5. 可以手动设置任务的 key，可以指定 keys 参数。</em></p>
+<p><strong>3、celery once使用</strong></p>
+<div class="highlight"><pre><span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="c1"># -*- coding: utf-8 -*-</span>
+<span class="sd">&#39;&#39;&#39;第一步: 安装&#39;&#39;&#39;</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">celery_once</span>
+
+<span class="sd">&#39;&#39;&#39;第二步: 增加配置&#39;&#39;&#39;</span>
+<span class="kn">from</span> <span class="nn">celery</span> <span class="kn">import</span> <span class="n">Celery</span>
+<span class="kn">from</span> <span class="nn">celery_once</span> <span class="kn">import</span> <span class="n">QueueOnce</span>
+<span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep</span>
+
+<span class="n">celery</span> <span class="o">=</span> <span class="n">Celery</span><span class="p">(</span><span class="s1">&#39;tasks&#39;</span><span class="p">,</span> <span class="n">broker</span><span class="o">=</span><span class="s1">&#39;amqp://guest@localhost//&#39;</span><span class="p">)</span>
+<span class="n">celery</span><span class="o">.</span><span class="n">conf</span><span class="o">.</span><span class="n">ONCE</span> <span class="o">=</span> <span class="p">{</span>
+  <span class="s1">&#39;backend&#39;</span><span class="p">:</span> <span class="s1">&#39;celery_once.backends.Redis&#39;</span><span class="p">,</span>
+  <span class="s1">&#39;settings&#39;</span><span class="p">:</span> <span class="p">{</span>
+    <span class="s1">&#39;url&#39;</span><span class="p">:</span> <span class="s1">&#39;redis://localhost:6379/0&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;default_timeout&#39;</span><span class="p">:</span> <span class="mi">60</span> <span class="o">*</span> <span class="mi">60</span>
+  <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="sd">&#39;&#39;&#39;第三步: 修改 delay 方法&#39;&#39;&#39;</span>
+<span class="n">example</span><span class="o">.</span><span class="n">delay</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="c1"># 修改为</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">example</span><span class="o">.</span><span class="n">apply_async</span><span class="p">(</span><span class="n">args</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>
+
+<span class="sd">&#39;&#39;&#39;第四步: 修改 task 参数&#39;&#39;&#39;</span>
+<span class="nd">@celery.task</span><span class="p">(</span><span class="n">base</span><span class="o">=</span><span class="n">QueueOnce</span><span class="p">,</span> <span class="n">once</span><span class="o">=</span><span class="p">{</span><span class="s1">&#39;graceful&#39;</span><span class="p">:</span> <span class="bp">True</span><span class="p">,</span> <span class="n">keys</span><span class="s1">&#39;: [&#39;</span><span class="n">a</span><span class="s1">&#39;]})</span>
+<span class="k">def</span> <span class="nf">slow_add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="n">sleep</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># 参考官方：https://github.com/cameronmaske/celery-once</span>
+</pre></div>
+
+
+<p><img alt="celery" src="D:\积云学习资料\大实训\celery.png">4、用处</p>
+<p>celery：用处</p>
+<div class="highlight"><pre><span></span><span class="mi">1</span><span class="p">.</span><span class="err">定时任务（延时报警）</span>
+<span class="mi">2</span><span class="p">.</span><span class="err">异步任务（发邮件，发信息）</span>
+</pre></div></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

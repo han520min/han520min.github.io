@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/celery.html">celery</a></li>
+					<li ><a href="/category/devops.html">DevOps</a></li>
+					<li class="active"><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/git.html">GIT</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/jwt.html">jwt</a></li>
+					<li ><a href="/category/linux.html">Linux</a></li>
+					<li ><a href="/category/modelcao-zuo.html">model操作</a></li>
+					<li ><a href="/category/myself.html">myself</a></li>
+					<li ><a href="/category/rabbitmq.html">rabbitmq</a></li>
+					<li ><a href="/category/redis.html">redis</a></li>
+					<li ><a href="/category/supervisor.html">Supervisor</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+					<li ><a href="/category/yun-wei.html">运维</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+	<div class='article'>
+		<div class="page-header"><h1>八大排序</h1></div>
+		<div class="well small">Permalink: <a class="more" href="/Django八大排序.html">2019-08-09 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/django.html">Django</a>
+tags: <a href="/tag/django.html">Django</a> </div>
+		<div><h2>插入排序</h2>
+<p>插入排序：插入排序的基本操作就是将一个数据插入到已经排好序的有序数据中，从而得到一个新的、个数加一的有序数据，算法适用于少量数据的排序；首先将第一个作为已经排好序的，然后每次从后的取出插入到前面并排序；</p>
+<p>时间复杂度：O(n²)</p>
+<p>空间复杂度：O(1)</p>
+<p>稳定性：稳定</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">insert_sort</span><span class="p">(</span><span class="n">ilist</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ilist</span><span class="p">)):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">ilist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">ilist</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">ilist</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">ilist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+                <span class="k">break</span>
+    <span class="k">return</span> <span class="n">ilist</span>
+</pre></div>
+
+
+<h2>冒泡排序</h2>
+<p>冒泡排序：它重复地走访过要排序的数列，一次比较两个元素，如果他们的顺序错误就把他们交换过来。走访数列的工作是重复地进行直到没有再需要交换，也就是说该数列已经排序完成</p>
+<p>时间复杂度：O(n²)</p>
+<p>空间复杂度：O(1)</p>
+<p>稳定性：稳定</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">bubble_sort</span><span class="p">(</span><span class="n">blist</span><span class="p">):</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">blist</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">count</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">blist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">blist</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                <span class="n">blist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">blist</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">blist</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">blist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">blist</span>
+
+<span class="n">blist</span> <span class="o">=</span> <span class="n">bubble_sort</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+<span class="k">print</span><span class="p">(</span><span class="n">blist</span><span class="p">)</span>
+</pre></div>
+
+
+<h2>快排</h2>
+<p>快速排序：通过一趟排序将要排序的数据分割成独立的两部分，其中一部分的所有数据都比另外一部分的所有数据都要小，然后再按此方法对这两部分数据分别进行快速排序，整个排序过程可以递归进行，以此达到整个数据变成有序序列</p>
+<p>时间复杂度：O(nlog₂n)</p>
+<p>空间复杂度：O(nlog₂n)</p>
+<p>稳定性：不稳定</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">quick_sort</span><span class="p">(</span><span class="n">qlist</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">qlist</span> <span class="o">==</span> <span class="p">[]:</span>
+        <span class="k">return</span> <span class="p">[]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">qfirst</span> <span class="o">=</span> <span class="n">qlist</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">qless</span> <span class="o">=</span> <span class="n">quick_sort</span><span class="p">([</span><span class="n">l</span> <span class="k">for</span> <span class="n">l</span> <span class="ow">in</span> <span class="n">qlist</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">l</span> <span class="o">&lt;</span> <span class="n">qfirst</span><span class="p">])</span>
+        <span class="n">qmore</span> <span class="o">=</span> <span class="n">quick_sort</span><span class="p">([</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">qlist</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span> <span class="k">if</span> <span class="n">m</span> <span class="o">&gt;=</span> <span class="n">qfirst</span><span class="p">])</span>
+        <span class="k">return</span> <span class="n">qless</span> <span class="o">+</span> <span class="p">[</span><span class="n">qfirst</span><span class="p">]</span> <span class="o">+</span> <span class="n">qmore</span>
+
+<span class="n">qlist</span> <span class="o">=</span> <span class="n">quick_sort</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+
+
+<h2>选择排序</h2>
+<p>选择排序：第1趟，在待排序记录r1 ~ r[n]中选出最小的记录，将它与r1交换；第2趟，在待排序记录r2 ~ r[n]中选出最小的记录，将它与r2交换；以此类推，第i趟在待排序记录r[i] ~ r[n]中选出最小的记录，将它与r[i]交换，使有序序列不断增长直到全部排序完毕</p>
+<p>时间复杂度：O(n²)</p>
+<p>空间复杂度：O(1)</p>
+<p>稳定性：不稳定</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">select_sort</span><span class="p">(</span><span class="n">slist</span><span class="p">):</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slist</span><span class="p">)):</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">i</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">slist</span><span class="p">)):</span>
+            <span class="k">if</span> <span class="n">slist</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">&lt;</span> <span class="n">slist</span><span class="p">[</span><span class="n">x</span><span class="p">]:</span>
+                <span class="n">x</span> <span class="o">=</span> <span class="n">j</span>
+        <span class="n">slist</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">slist</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">slist</span><span class="p">[</span><span class="n">x</span><span class="p">],</span> <span class="n">slist</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">slist</span>
+
+<span class="n">slist</span> <span class="o">=</span> <span class="n">select_sort</span><span class="p">([</span><span class="mi">4</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">8</span><span class="p">])</span>
+</pre></div>
+
+
+<h2>归并排序</h2>
+<p>归并排序：采用分治法（Divide and Conquer）的一个非常典型的应用。将已有序的子序列合并，得到完全有序的序列；即先使每个子序列有序，再使子序列段间有序。若将两个有序表合并成一个有序表，称为二路归并</p>
+<p>时间复杂度：O(nlog₂n)</p>
+<p>空间复杂度：O(1)</p>
+<p>稳定性：稳定</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">merge_sort</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">merge_arr</span><span class="p">(</span><span class="n">arr_l</span><span class="p">,</span> <span class="n">arr_r</span><span class="p">):</span>
+        <span class="n">array</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_l</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_r</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">arr_l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="n">arr_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr_l</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+            <span class="k">elif</span> <span class="n">arr_l</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="n">arr_r</span><span class="p">[</span><span class="mi">0</span><span class="p">]:</span>
+                <span class="n">array</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">arr_r</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_l</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">+=</span> <span class="n">arr_l</span>
+        <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">arr_r</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">array</span> <span class="o">+=</span> <span class="n">arr_r</span>
+        <span class="k">return</span> <span class="n">array</span>
+
+    <span class="k">def</span> <span class="nf">recursive</span><span class="p">(</span><span class="n">array</span><span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">array</span>
+        <span class="n">mid</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">array</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="n">arr_l</span> <span class="o">=</span> <span class="n">recursive</span><span class="p">(</span><span class="n">array</span><span class="p">[:</span><span class="n">mid</span><span class="p">])</span>
+        <span class="n">arr_r</span> <span class="o">=</span> <span class="n">recursive</span><span class="p">(</span><span class="n">array</span><span class="p">[</span><span class="n">mid</span><span class="p">:])</span>
+        <span class="k">return</span> <span class="n">merge_arr</span><span class="p">(</span><span class="n">arr_l</span><span class="p">,</span> <span class="n">arr_r</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">recursive</span><span class="p">(</span><span class="n">array</span><span class="p">)</span>
+</pre></div></div>
+	</div>
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

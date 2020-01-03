@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/django.html">Django</a></li>
+					<li ><a href="/category/hanmin.html">hanmin</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/mimi.html">mimi</a></li>
+					<li ><a href="/category/my-han.html">my-han</a></li>
+					<li class="active"><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+<div class="page-header"><h1>韩敏的技术博客 <small>my-shang</small></h1></div>
+<div class='article'>
+	<h2>支付宝沙箱模式</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-支付宝沙箱.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/shang-wei.html">商伟 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h3>支付宝支付</h3>
+<ul>
+<li>安装模块</li>
+</ul>
+<div class="highlight"><pre><span></span>  pip install Crypto 
+  pip install pycryptodome
+  pip install python-alipay-sdk
+</pre></div>
+
+
+<ul>
+<li>
+<p>下载RSA工具
+  <img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134351045-2102495901.png"></p>
+</li>
+<li>
+<p>将生成的公钥上传到支付宝沙箱的RSA2(SHA256)密钥(推荐）处</p>
+</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134403625-1800493074.jpg"></p>
+<ul>
+<li>设置公钥后会生成一个支付宝公钥，将其复制</li>
+</ul>
+<p><img alt="img" src="https://img2018.cnblogs.com/blog/1354307/201911/1354307-20191107134416436-1047655704.png"></p>
+<ul>
+<li>然后将其写入一个文件 <code>alipay_pulic_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN PUBLIC KEY-----
+  MIGfMA0GCSqGSIb3DQEBAQUAA4GNIgHnOn7LLILlKETd6BFRJ0GqgS2Y3mn1wMQmyh9zEyWlz5p1zrahRahbXAfCfSqshSNfqOmAQzSHRVjCqjsAw1jyqrXaPdKBmr90DIpIxmIyKXv4GGAkPyJ/6FTFY99uhpiq0qadD/uSzQsefWo0aTvP/65zi3eof7TcZ32oWpwIDAQAB
+  -----END PUBLIC KEY-----
+</pre></div>
+
+
+<ul>
+<li>把之前生成的私钥也写入另外一个文件 <code>app_private_key.pem</code></li>
+</ul>
+<div class="highlight"><pre><span></span>  -----BEGIN RSA PRIVATE KEY-----
+  MIIEowIBAAKCAQEAgxk5N/XQkRatTn56TxGo8nVGk4YKb7VheSDtcLezj7sDdibVamrWz/77VG1GY17Q2jOnCoHpngWDsJybZ/5icblvk3I76H5GT+zjYMBbHXfAlnRB7BG6+Vo7YWe442S0E+A8z8N+R3MArSb3+Coht+8JgvGNdsVE9u2upmxq4GHMKDu/TY3Q7lPIXW3iL6Kxn …</pre></div> <a class="btn primary xsmall" href="/my-支付宝沙箱.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django跨域与VUE跨域</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-跨域.html">2019-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>Django 解决跨域</h2>
+<ul>
+<li>安装 django-cors-headers</li>
+</ul>
+<div class="highlight"><pre><span></span>  pip install django-cors-headers
+</pre></div>
+
+
+<ul>
+<li>在 settings.py 的 install_apps 中注册</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">INSTALLED_APPS</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders&#39;</span>
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在settings.py 的 middleware 中注册【8</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">MIDDLEWARE</span> <span class="o">=</span> <span class="o">[</span>
+      <span class="s1">&#39;corsheaders.middleware.CorsMiddleware&#39;</span>, <span class="c1"># 一定要在commonmiddleware之上</span>
+    <span class="s1">&#39;django.middleware.common.CommonMiddleware&#39;</span>,
+  <span class="o">]</span>
+</pre></div>
+
+
+<ul>
+<li>在 settings.py 的任意位置 添加</li>
+</ul>
+<div class="highlight"><pre><span></span>  <span class="nv">CORS_ORIGIN_ALLOW_ALL</span> <span class="o">=</span> True
+</pre></div>
+
+
+<ul>
+<li>完成django 跨域</li>
+</ul>
+<h2>VUE 解决跨域</h2>
+<ul>
+<li>打开config/index.js,在proxyTable中添写如下代码</li>
+</ul>
+<div class="highlight"><pre><span></span>proxyTable: <span class="o">{</span> 
+  <span class="s1">&#39;/api&#39;</span>: <span class="o">{</span>  //使用<span class="s2">&quot;/api&quot;</span>来代替 …</pre></div> <a class="btn primary xsmall" href="/my-跨域.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>DevOps介绍</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-DevOps介绍.html">2017-12-24 18:44:00+01:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h1>1.1DevOps介绍</h1>
+<h2>1、DevOps定义（是一种思想，大型公司）</h2>
+<p>​       1、DevOps是“开发”和“运维”的缩写。</p>
+<p>​       2、透过自动化“软件交付”和“架构变更”的流程，来使得构建、测试、发布软件能够更加地快捷、频繁和可靠。</p>
+<h2>2、DevOps持续交付环</h2>
+<p>​       1、开发交付：计划 - - &gt; 编码 - - &gt; 构架 - - &gt; 测试 - - &gt; 版本 - - &gt; 部署 - - &gt; 运维 - - &gt; 监控</p>
+<h2>3、传统交付</h2>
+<p>​       持续集成：代码合并，构建，部署，测试，不断进行，对结果反馈</p>
+<p>​       持续部署：将产品部署在测试环境，预生产环境，生产环境</p>
+<p>运维：维护线上服务的稳定，底层平台的运行 …</p> <a class="btn primary xsmall" href="/my-DevOps介绍.html">more…</a>
+	</div>
+</div>	
+<div class='article'>
+	<h2>django分页组件（paginator）</h2>
+	<div class="well small">Permalink: <a class="more" href="/my-分页.html">2017-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/my-shang.html">my-shang</a>
+tags: <a href="/tag/shang.html">shang</a> </div>
+	<div class="summary"><h1>Django分页组件(paginator)</h1>
+<blockquote>
+<p><code>shell
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger</code></p>
+</blockquote>
+<div class="highlight"><pre><span></span>  Paginator
+</pre></div>
+
+
+<p>：创建分页对象</p>
+<p>### 分页对象内置属性</p>
+<div class="highlight"><pre><span></span><span class="nv">all_</span> <span class="o">=</span> models.objects.all<span class="o">()</span>
+<span class="nv">p</span> <span class="o">=</span> Paginator<span class="o">(</span>all_, <span class="m">10</span><span class="o">)</span>
+<span class="c1"># 分页all_数据，每页显示10条数据</span>
+p.count <span class="c1"># 总数据量</span>
+p.num_pages<span class="o">()</span> <span class="c1"># 分页数</span>
+p.page_range<span class="o">()</span> <span class="c1"># 列表形式返回当前可有的页数 [1,2,3]</span>
+<span class="nv">page_1</span> <span class="o">=</span> p.page<span class="o">(</span><span class="m">1</span><span class="o">)</span> <span class="c1"># 选择第一页，返回第一页数据对象</span>
+</pre></div>
+
+
+<h3>某一页内置属性</h3>
+<div class="highlight"><pre><span></span>page_1.number <span class="c1"># 当前页的页码</span>
+page_1.has_next<span class="o">()</span> <span class="c1"># 是否有下一页</span>
+page_1 …</pre></div> <a class="btn primary xsmall" href="/my-分页.html">more…</a>
+	</div>
+</div>	
+
+<div class="pagination">
+<ul>
+		<li class="prev"><a href="/category/my-shang.html">&larr; Previous</a></li>
+		<li class=""><a href="/category/my-shang.html">1</a></li>
+		<li class="active"><a href="/category/my-shang2.html">2</a></li>
+		<li class="next disabled"><a href="#">&rarr; Next</a></li>
+</ul>
+</div>
+
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>

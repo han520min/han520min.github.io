@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>韩敏的技术博客</title>
+	<meta name="description" content="">
+	<meta name="author" content="韩敏">
+
+	<!-- HTML5 shim, for IE6-8 support of HTML elements -->
+	<!--[if lt IE 9]>
+		<script src="/theme/html5.js"></script>
+	<![endif]-->
+
+	<!-- Styles -->
+	<link href="/theme/bootstrap.min.css" rel="stylesheet">
+	<link href="/theme/local.css" rel="stylesheet">
+	<link href="/theme/pygments.css" rel="stylesheet">
+
+	<!-- Feeds -->
+
+
+
+
+</head>
+<body>
+	<div class="topbar">
+	  <div class="topbar-inner">
+		<div class="container-fluid">
+		  <a class="brand" href="/">韩敏的技术博客</a>
+			<ul class="nav">
+					<li ><a href="/category/django.html">Django</a></li>
+					<li class="active"><a href="/category/hanmin.html">hanmin</a></li>
+					<li ><a href="/category/ji-zhu.html">技术</a></li>
+					<li ><a href="/category/mimi.html">mimi</a></li>
+					<li ><a href="/category/my-han.html">my-han</a></li>
+					<li ><a href="/category/my-shang.html">my-shang</a></li>
+					<li ><a href="/category/vue.html">VUE</a></li>
+			</ul>
+			<p class="pull-right"><a href="/archives.html">[archives]</a> <a href="/tags.html">[tags]</a></p>
+		</div>
+	  </div>
+	</div>
+
+	<div class="container-fluid">
+	  <div class="sidebar">
+		<div class="well">
+			<h3>Blogroll</h3>
+			<ul>
+				<li><a href="http://getpelican.com/">Pelican</a></li>
+				<li><a href="http://python.org/">Python.org</a></li>
+				<li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+			</ul>
+			<div class="social">
+			<h3>Social</h3>
+			<ul>
+				<li><a href="https://shangxiaoweia.github.io">shangwei</a></li>
+			</ul>
+			</div>
+		</div>
+	  </div>
+	  <div class="content">
+<div class="page-header"><h1>韩敏的技术博客 <small>hanmin</small></h1></div>
+<div class='article'>
+	<h2>Django中F、Q</h2>
+	<div class="well small">Permalink: <a class="more" href="/my- Django.html">2018-08-08 18:44:00+02:00</a>
+by <a class="url fn" href="/author/han-min.html">韩敏 </a>
+ in <a href="/category/hanmin.html">hanmin</a>
+tags: <a href="/tag/django.html">django</a> </div>
+	<div class="summary"><h2>一、Q方法</h2>
+<p>1.对关键字参数进行分装：</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">Q</span>
+<span class="kn">from</span> <span class="nn">app01.models</span> <span class="kn">import</span> <span class="n">Userinfo</span>
+
+<span class="n">userinfo</span> <span class="o">=</span> <span class="n">Userinfo</span><span class="o">.</span><span class="n">objects</span><span class="o">.</span><span class="n">filter</span><span class="p">(</span><span class="n">Q</span><span class="p">(</span><span class="n">question__startswith</span><span class="o">=</span><span class="s1">&#39;王&#39;</span><span class="p">))</span>
+</pre></div>
+
+
+<ol>
+<li>| 操作符</li>
+</ol>
+<p>```
+   from django.db.models import Q
+   from app01.models import Userinfo</p>
+<p>userinfo = Userinfo.objects.filter(Q(question__startswith='王') | Q(question__startswith='六'))
+   ```</p>
+<p>3.Q对象可以用~操作表示否定</p>
+<div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">django.db …</span></pre></div> <a class="btn primary xsmall" href="/my- Django.html">more…</a>
+	</div>
+</div>	
+
+
+		<footer>
+		  <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme based on <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap</a>.</p>
+		  <p>&copy; 韩敏</p>
+		</footer>
+	  </div>
+
+	</div>
+</body>
+</html>
